@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Now — Mara Lindqvist</title>
+<style>
+  :root {
+    --ink: #1b1d1f;
+    --muted: #6b7075;
+    --line: #e4e2dd;
+    --paper: #faf9f6;
+    --accent: #2f6f62;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 96px 24px 120px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  header p.role {
+    margin: 0 0 28px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  header p.updated {
+    margin: 0 0 56px;
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  header p.updated a {
+    color: inherit;
+  }
+  section {
+    margin-bottom: 48px;
+  }
+  section h2 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin: 0 0 16px;
+  }
+  section p, section li {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  ul.plain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.plain li {
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+  ul.plain li:first-child {
+    border-top: none;
+  }
+  ul.plain li .label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Mara Lindqvist</h1>
+      <p class="role">Product designer, mostly working on developer tools.</p>
+      <p class="updated">Updated <time datetime="2026-09-01">Sep 1, 2026</time> — part of the <a href="https://nownownow.com/about" target="_blank" rel="noopener">now page movement</a></p>
+    </header>
+
+    <section>
+      <h2>Now</h2>
+      <p>
+        Spending most of my week on the onboarding rework for our internal
+        design-system tooling — trying to cut the time from "install" to
+        "first working screen" down from twenty minutes to under five.
+        Outside of that, slowly migrating my personal site off a page
+        builder and onto hand-written HTML, partly out of stubbornness.
+      </p>
+    </section>
+
+    <section>
+      <h2>Reading</h2>
+      <ul class="plain">
+        <li>
+          <span class="label">Nonfiction</span>
+          <em>How Buildings Learn</em> — Stewart Brand
+        </li>
+        <li>
+          <span class="label">Fiction</span>
+          <em>Klara and the Sun</em> — Kazuo Ishiguro
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Learning</h2>
+      <p>
+        Working through a course on typography history — mostly to have
+        better vocabulary for why a layout feels off, rather than just
+        knowing that it does.
+      </p>
+    </section>
+
+    <footer>
+      Inspired by <a href="https://nownownow.com" target="_blank" rel="noopener">nownownow.com</a>.
+      Get in touch at <a href="mailto:hello@example.com">hello@example.com</a>.
+    </footer>
+  </main>
+</body>
+</html>

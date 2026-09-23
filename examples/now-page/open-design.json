@@ -1,0 +1,19 @@
+{
+  "specVersion": "1.0.0",
+  "name": "community-now-page",
+  "title": "Now Page",
+  "version": "0.1.0",
+  "description": "A minimalist personal 'now page' listing current focuses, reading, and learning.",
+  "od": {
+    "kind": "bundle",
+    "mode": "prototype",
+    "useCase": {
+      "query": {
+        "en": "Build a 'now page' for me — a single-page personal site section listing what I'm currently focused on, reading, and learning. Keep it to one restrained accent color, system fonts, no stock photography or generic icons, and use my real content instead of placeholder text."
+      },
+      "exampleOutputs": [
+        { "path": "example.html" }
+      ]
+    }
+  }
+}

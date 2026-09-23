@@ -1,0 +1,56 @@
+# Contributing a design
+
+Thanks for contributing. This repo is deliberately small in scope: each entry is one folder under `examples/`, containing a hand-built rendered design plus the instructions an agent needs to remix it.
+
+## Folder shape
+
+```
+examples/<your-design-slug>/
+├── SKILL.md          # required
+├── example.html      # required — the hand-built, rendered output
+└── open-design.json  # optional but recommended — carries the starter prompt
+```
+
+`SKILL.md` frontmatter:
+
+```yaml
+---
+name: your-design-slug
+en_name: "Your Design Title"
+description: "One paragraph: what this produces, for whom, what's in it."
+en_description: "Same, in English — used as the fallback display copy."
+category: lowercase-tag        # free-form grouping tag, e.g. "personal", "marketing", "dashboard"
+tags: ["a few", "search keywords"]
+od:
+  mode: prototype               # prototype | deck | template | image | video | audio
+  surface: web
+  preview:
+    type: html
+    entry: example.html
+  design_system:
+    requires: false              # true if the workflow should read an active design-system's tokens
+  example_prompt: "A copy-pastable prompt that demos this design well."
+---
+
+Free-form Markdown: the workflow an agent should follow to reproduce/adapt this design.
+```
+
+## Merge bar
+
+Adapted from upstream open-design's own [design-template contributing guide](https://github.com/nexu-io/open-design/blob/main/docs/skills-contributing.md) — same spirit, smaller scope:
+
+- **`example.html` is hand-built.** Opens straight from disk, looks like something a designer would actually ship. No lorem ipsum, no placeholder `<svg><rect/></svg>` hero.
+- **No AI-slop visuals.** No purple-to-pink gradients, no generic emoji icons standing in for real iconography, no rounded card with a left-border accent as the default "component," no invented statistics ("10× faster," "users save 4 hours/week").
+- **Honest placeholders.** Where the agent won't have a real value, the `SKILL.md` body should tell it to write `—` or a clearly-labeled placeholder, not fabricate one.
+- **`example_prompt` actually works.** Paste it into the extension yourself and confirm it produces something close to `example.html` before opening a PR.
+- **Slug is ASCII, kebab-case.** `your-design-slug`, not `YourDesignSlug` or `your_design_slug`.
+- **No large binaries.** Inline SVG or system/Google-fonts only; no raw PNG screenshots, no un-licensed fonts.
+- **One design per PR.** Keeps review small and lets us tag releases incrementally.
+
+## Forking an existing design
+
+If you start from another entry here, keep its original LICENSE/attribution in a `references/` subfolder and say so in the PR description — same convention upstream open-design uses for forked templates.
+
+## License
+
+By opening a PR, you agree your contribution is licensed under this repo's [MIT license](LICENSE), except for a forked design that explicitly retains its original license per the point above.
