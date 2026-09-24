@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude notification banner</title>
+  <style>
+    :root {
+      --parchment: #f5f4ed;
+      --ivory: #faf9f5;
+      --near-black: #141413;
+      --charcoal: #30302e;
+      --olive: #5e5d59;
+      --stone: #87867f;
+      --terracotta: #c96442;
+      --coral: #d97757;
+      --warm-border: rgba(240, 238, 230, 0.8);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--near-black);
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      color: var(--near-black);
+      font-family: Arial, sans-serif;
+    }
+
+    .stage {
+      position: relative;
+      width: min(100vw, 1920px);
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 74% 36%, rgba(201, 100, 66, 0.23), transparent 24%),
+        radial-gradient(circle at 23% 72%, rgba(217, 119, 87, 0.14), transparent 27%),
+        linear-gradient(116deg, #1b1b19 0%, #292824 48%, #141413 100%);
+    }
+
+    .stage::before {
+      position: absolute;
+      inset: -15%;
+      z-index: -1;
+      content: "";
+      background:
+        linear-gradient(106deg, transparent 14%, rgba(245, 244, 237, 0.07) 14.1%, transparent 14.4%),
+        linear-gradient(72deg, transparent 62%, rgba(245, 244, 237, 0.05) 62.1%, transparent 62.4%);
+      transform: rotate(-4deg) scale(1.2);
+      opacity: 0.72;
+    }
+
+    .ambient-copy {
+      position: absolute;
+      left: 8.4%;
+      bottom: 10.8%;
+      max-width: 490px;
+      color: rgba(250, 249, 245, 0.78);
+    }
+
+    .ambient-copy .eyebrow {
+      margin: 0 0 18px;
+      color: var(--coral);
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .ambient-copy h1 {
+      margin: 0;
+      color: var(--parchment);
+      font: 500 clamp(34px, 4.2vw, 76px) / 1.08 Georgia, serif;
+      letter-spacing: -0.025em;
+    }
+
+    .ambient-copy p {
+      max-width: 370px;
+      margin: 20px 0 0;
+      color: rgba(176, 174, 165, 0.9);
+      font-size: clamp(14px, 1.2vw, 19px);
+      line-height: 1.55;
+    }
+
+    .notification {
+      position: absolute;
+      top: 7.1%;
+      right: 4.4%;
+      width: min(510px, 39vw);
+      padding: 18px 20px 19px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 18px;
+      background: rgba(252, 251, 247, 0.82);
+      box-shadow: 0 24px 58px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(20, 20, 19, 0.12);
+      backdrop-filter: blur(32px) saturate(1.12);
+      -webkit-backdrop-filter: blur(32px) saturate(1.12);
+      animation: enter 760ms cubic-bezier(.2, .85, .25, 1) both;
+    }
+
+    .notification-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 15px;
+    }
+
+    .app {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--charcoal);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .claude-mark {
+      display: grid;
+      width: 25px;
+      height: 25px;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--terracotta);
+      color: var(--ivory);
+      font: 500 16px / 1 Georgia, serif;
+    }
+
+    .when {
+      color: var(--stone);
+      font-size: 13px;
+    }
+
+    .notification h2 {
+      max-width: 440px;
+      margin: 0;
+      color: var(--near-black);
+      font: 500 25px / 1.18 Georgia, serif;
+      letter-spacing: -0.018em;
+    }
+
+    .notification p {
+      margin: 9px 0 0;
+      color: var(--olive);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .notification-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--warm-border);
+    }
+
+    .detail {
+      color: var(--stone);
+      font-size: 12px;
+    }
+
+    .action {
+      padding: 8px 13px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--charcoal);
+      color: var(--ivory);
+      font: 600 12px / 1 Arial, sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    .playhead {
+      position: absolute;
+      right: 4.5%;
+      bottom: 5.8%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(245, 244, 237, 0.48);
+      font: 11px / 1 Arial, sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .playhead::before {
+      display: block;
+      width: 62px;
+      height: 1px;
+      content: "";
+      background: rgba(245, 244, 237, 0.33);
+    }
+
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(-18px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 760px) {
+      .notification {
+        top: 5%;
+        right: 4%;
+        width: min(92vw, 510px);
+      }
+
+      .ambient-copy {
+        left: 8%;
+        bottom: 11%;
+      }
+
+      .ambient-copy p { max-width: 300px; }
+      .playhead { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" aria-label="Claude product update notification overlay">
+    <section class="ambient-copy">
+      <p class="eyebrow">Claude · Product update</p>
+      <h1>More room for better thinking.</h1>
+      <p>Claude now keeps your projects, context, and conversations close at hand.</p>
+    </section>
+
+    <aside class="notification" role="status" aria-live="polite">
+      <div class="notification-top">
+        <div class="app"><span class="claude-mark" aria-hidden="true">C</span>Claude</div>
+        <time class="when" datetime="2026-09-24T09:41:00">now</time>
+      </div>
+      <h2>Your projects are ready in Claude</h2>
+      <p>Keep files, instructions, and conversations together so every new session starts with the right context.</p>
+      <div class="notification-foot">
+        <span class="detail">Claude · Product update</span>
+        <span class="action">Open Claude</span>
+      </div>
+    </aside>
+
+    <div class="playhead" aria-hidden="true">01:14 · 04:08</div>
+  </main>
+</body>
+</html>
