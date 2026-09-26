@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Create a warm, colorful digital birthday card in a vertical 4:5 aspect ratio with a rich gradient background in purple, pink, and blue tones. Include a cluster of three colorful SVG balloons (pink, gold, teal) at the top, scattered confetti dots and squares across the background, a bold white 'Happy Birthday!' headline where 'Birthday' is in a cursive script with a gold-to-pink gradient, a short heartfelt birthday message in white, and a white card panel at the bottom with dotted 'To:' and 'From:' lines. Add a small SVG cake with a flickering candle flame at the very bottom. Use Inter for body text, Caveat for the script accent, and JetBrains Mono for the To/From labels. Keep it print-friendly."
+      }
+    }
+  }
+}
