@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a bold, high-contrast portrait birthday party invitation (480×672px) with a large coral (#FF4B33) header block covering the top 62% of the card. In the header, place a small uppercase 'Turning' eyebrow, a massive age numeral in ultra-bold white text, and a 'You're invited!' headline. Below the header on a cream (#FBF4E9) background, add the guest's name in bold black, then a clean list of event details (Date, Time, Location, RSVP) with coral uppercase labels on the left and placeholder values on the right, separated by thin horizontal rules. Use system sans-serif fonts only — no images, no decorative elements."
+      }
+    }
+  }
+}
