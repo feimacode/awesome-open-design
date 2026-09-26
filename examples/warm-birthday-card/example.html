@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Card</title>
+<meta name="description" content="A warm, colorful digital birthday card with a Happy Birthday message and blank To/From lines to fill in.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..900&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#3B82F6;
+    --secondary:#8B5CF6;
+    --pink:#F868A6;
+    --gold:#FFC24B;
+    --teal:#2FD4C0;
+    --ink:#1c1330;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:#141021;
+    color:var(--ink);
+    font-family:'Inter', system-ui, sans-serif;
+  }
+
+  body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding: clamp(16px, 4vw, 48px) 16px;
+  }
+
+  .card{
+    position:relative;
+    width:100%;
+    max-width:620px;
+    aspect-ratio: 4 / 5;
+    border-radius: 28px;
+    overflow:hidden;
+    background:
+      radial-gradient(90% 55% at 20% 0%, rgba(139,92,246,0.75), transparent 60%),
+      radial-gradient(90% 60% at 100% 10%, rgba(248,104,166,0.7), transparent 62%),
+      radial-gradient(100% 70% at 50% 100%, rgba(59,130,246,0.65), transparent 60%),
+      linear-gradient(160deg, #3a1f63 0%, #6a2a83 35%, #b53d84 65%, #e05a6e 100%);
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
+    display:flex;
+    flex-direction:column;
+  }
+
+  .deco{ position:absolute; inset:0; pointer-events:none; z-index:1; }
+
+  main{
+    position:relative;
+    z-index:2;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: 8% 8% 6%;
+    text-align:center;
+  }
+
+  .balloons{
+    width: clamp(140px, 34vw, 220px);
+    height: auto;
+    margin-bottom: clamp(4px, 1.5vh, 12px);
+  }
+
+  h1{
+    margin: 0;
+    color:#fff;
+    font-weight:900;
+    letter-spacing:-0.01em;
+    line-height:0.95;
+    font-size: clamp(38px, 9vw, 64px);
+  }
+
+  h1 .script{
+    display:block;
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size: 1.35em;
+    line-height: 1;
+    margin-top: 0.08em;
+    background: linear-gradient(90deg, var(--gold), var(--pink) 70%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .message{
+    margin: clamp(14px, 2.6vh, 22px) 0 0;
+    max-width: 32ch;
+    font-size: clamp(15px, 2.6vw, 18px);
+    line-height:1.55;
+    font-weight:500;
+    color: rgba(255,255,255,0.92);
+  }
+
+  .spacer{ flex:1; min-height: clamp(16px, 4vh, 36px); }
+
+  .fields{
+    width:100%;
+    background: rgba(255,255,255,0.94);
+    border-radius:18px;
+    padding: clamp(18px, 4vw, 26px) clamp(20px, 4.5vw, 30px);
+    box-shadow: 0 12px 30px -12px rgba(0,0,0,0.35);
+  }
+
+  .field{
+    display:flex;
+    align-items:baseline;
+    gap: 10px;
+    font-size: clamp(14px, 2.4vw, 17px);
+  }
+
+  .field + .field{ margin-top: clamp(12px, 2.4vh, 18px); }
+
+  .field .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    letter-spacing:0.04em;
+    color: var(--secondary);
+    flex:none;
+  }
+
+  .field .line{
+    flex:1;
+    border:none;
+    border-bottom: 2px dotted rgba(28,19,48,0.35);
+    height: 1.6em;
+  }
+
+  footer{
+    position:relative;
+    z-index:2;
+    display:flex;
+    justify-content:center;
+    padding: clamp(14px, 3vh, 22px) 0 clamp(20px, 4vh, 30px);
+  }
+
+  .cake{
+    width: clamp(64px, 12vw, 88px);
+    height: auto;
+  }
+
+  @keyframes flicker{
+    0%,100%{ opacity:1; transform: scaleY(1); }
+    50%{ opacity:0.75; transform: scaleY(0.85); }
+  }
+  .flame{
+    animation: flicker 1.6s ease-in-out infinite;
+    transform-origin: 50% 100%;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .flame{ animation:none; }
+  }
+
+  @media print{
+    body{ padding:0; background:#141021; }
+    .card{ max-width:none; width:1000px; aspect-ratio:auto; height:1250px; border-radius:0; box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card" role="img" aria-label="Happy Birthday card with balloons, confetti, a candle-lit cake, and blank To and From lines to fill in">
+
+  <svg class="deco" aria-hidden="true" focusable="false" viewBox="0 0 800 1000" preserveAspectRatio="none">
+    <g>
+      <circle cx="70" cy="120" r="7" fill="#FFC24B"/>
+      <circle cx="120" cy="80" r="5" fill="#2FD4C0"/>
+      <rect x="700" y="100" width="10" height="10" fill="#F868A6" transform="rotate(20 705 105)"/>
+      <circle cx="740" cy="180" r="6" fill="#FFC24B"/>
+      <rect x="60" y="220" width="9" height="9" fill="#8B5CF6" transform="rotate(35 65 225)"/>
+      <circle cx="730" cy="300" r="5" fill="#3B82F6"/>
+      <rect x="720" y="60" width="8" height="8" fill="#2FD4C0" transform="rotate(-15 724 64)"/>
+      <circle cx="40" cy="300" r="6" fill="#F868A6"/>
+      <circle cx="660" cy="900" r="6" fill="#FFC24B"/>
+      <circle cx="90" cy="880" r="5" fill="#2FD4C0"/>
+      <rect x="700" y="850" width="9" height="9" fill="#F868A6" transform="rotate(10 704 854)"/>
+      <rect x="70" y="820" width="8" height="8" fill="#8B5CF6" transform="rotate(25 74 824)"/>
+    </g>
+  </svg>
+
+  <main>
+    <svg class="balloons" viewBox="0 0 200 180" aria-hidden="true" focusable="false">
+      <line x1="60" y1="95" x2="52" y2="150" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+      <line x1="100" y1="105" x2="100" y2="155" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+      <line x1="140" y1="95" x2="148" y2="150" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+      <ellipse cx="60" cy="60" rx="30" ry="38" fill="#F868A6"/>
+      <ellipse cx="100" cy="50" rx="34" ry="44" fill="#FFC24B"/>
+      <ellipse cx="140" cy="60" rx="30" ry="38" fill="#2FD4C0"/>
+      <path d="M55 96 L60 106 L65 96 Z" fill="#F868A6"/>
+      <path d="M94 92 L100 104 L106 92 Z" fill="#FFC24B"/>
+      <path d="M135 96 L140 106 L145 96 Z" fill="#2FD4C0"/>
+      <ellipse cx="50" cy="48" rx="8" ry="11" fill="rgba(255,255,255,0.35)"/>
+      <ellipse cx="90" cy="36" rx="9" ry="12" fill="rgba(255,255,255,0.35)"/>
+      <ellipse cx="130" cy="48" rx="8" ry="11" fill="rgba(255,255,255,0.35)"/>
+    </svg>
+
+    <h1>Happy<span class="script">Birthday!</span></h1>
+
+    <p class="message">Here's to another trip around the sun — filled with good laughs, good friends, and every reason to celebrate. Have the best day.</p>
+
+    <div class="spacer"></div>
+
+    <div class="fields">
+      <div class="field">
+        <span class="tag">To:</span>
+        <span class="line" aria-hidden="true"></span>
+      </div>
+      <div class="field">
+        <span class="tag">From:</span>
+        <span class="line" aria-hidden="true"></span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <svg class="cake" viewBox="0 0 100 90" aria-hidden="true" focusable="false">
+      <g class="flame">
+        <path d="M50 6c4 6 4 10 0 14-4-4-4-8 0-14Z" fill="#FFC24B"/>
+        <path d="M50 10c2 3 2 5 0 7-2-2-2-4 0-7Z" fill="#fff" opacity="0.8"/>
+      </g>
+      <rect x="47" y="20" width="6" height="10" fill="#E9C89A"/>
+      <rect x="20" y="46" width="60" height="20" rx="4" fill="#F868A6"/>
+      <rect x="20" y="66" width="60" height="18" rx="4" fill="#8B5CF6"/>
+      <rect x="15" y="40" width="70" height="10" rx="5" fill="#FFC24B"/>
+      <circle cx="30" cy="45" r="2.4" fill="#fff"/>
+      <circle cx="50" cy="45" r="2.4" fill="#fff"/>
+      <circle cx="70" cy="45" r="2.4" fill="#fff"/>
+    </svg>
+  </footer>
+
+</div>
+
+</body>
+</html>
