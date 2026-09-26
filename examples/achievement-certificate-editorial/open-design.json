@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design an achievement certificate, editorial style: a thin double-rule border around the full page, a serif title ('Certificate of Achievement'), a centered recipient-name line, a short body line describing the achievement, and a restrained seal/mark drawn as inline SVG (simple geometric seal, not a stock badge graphic or emoji ribbon), plus two signature-line placeholders at the bottom. No gold-gradient border, no clipart laurel wreath. Use — for recipient name/achievement text I haven't given you."
+      }
+    }
+  }
+}

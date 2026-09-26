@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Two-Column Monochrome Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #111111;
+    --mid: #5a5a5a;
+    --line: #111111;
+    --hair: #d8d8d8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #ececec;
+    font-family: 'Inter', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    padding: 28px 0;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 16mm 14mm 18mm;
+  }
+  header.masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 22px;
+  }
+  header.masthead h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  header.masthead .role {
+    margin-top: 4px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  header.masthead .updated {
+    font-size: 10.5px;
+    color: var(--mid);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 62mm 1fr;
+    gap: 0;
+  }
+  .rail {
+    padding-right: 16px;
+    border-right: 1px solid var(--hair);
+  }
+  .main {
+    padding-left: 20px;
+  }
+
+  h2.label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  section { margin-bottom: 22px; }
+  section:last-child { margin-bottom: 0; }
+
+  .rail dl {
+    margin: 0;
+    font-size: 11.5px;
+    line-height: 1.6;
+  }
+  .rail dt {
+    color: var(--mid);
+    font-size: 9.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .rail dt:first-child { margin-top: 0; }
+  .rail dd { margin: 1px 0 0; color: var(--ink); }
+
+  .rail ul.plain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 11.5px;
+  }
+  .rail ul.plain li {
+    padding: 6px 0;
+    border-top: 1px solid var(--hair);
+  }
+  .rail ul.plain li:first-child { border-top: none; padding-top: 0; }
+
+  .lang-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-top: 1px solid var(--hair);
+    font-size: 11.5px;
+  }
+  .lang-row:first-child { border-top: none; padding-top: 0; }
+  .lang-row span.level { color: var(--mid); }
+
+  .edu-entry + .edu-entry { margin-top: 12px; }
+  .edu-entry .school { font-size: 12.5px; font-weight: 600; }
+  .edu-entry .degree,
+  .edu-entry .dates { font-size: 11px; color: var(--mid); margin-top: 1px; }
+
+  .summary {
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: #262626;
+    max-width: 100%;
+  }
+
+  ul.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  ul.timeline li.entry {
+    position: relative;
+    padding-left: 20px;
+    padding-bottom: 22px;
+    border-left: 1px solid var(--hair);
+    margin-left: 4px;
+  }
+  ul.timeline li.entry:last-child {
+    padding-bottom: 0;
+    border-left: 1px solid transparent;
+  }
+  ul.timeline li.entry::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 3px;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    background: #fff;
+  }
+  .entry .row-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .entry .title-co { font-size: 13.5px; font-weight: 600; }
+  .entry .title-co span.co { font-weight: 400; color: var(--mid); }
+  .entry .dates { font-size: 10.5px; color: var(--mid); white-space: nowrap; }
+  .entry ul.bullets {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+  }
+  .entry ul.bullets li {
+    position: relative;
+    padding-left: 12px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: #262626;
+    margin-bottom: 3px;
+  }
+  .entry ul.bullets li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--mid);
+  }
+
+  section.projects ul.plain-projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+  }
+  section.projects li {
+    padding: 8px 0;
+    border-top: 1px solid var(--hair);
+  }
+  section.projects li:first-child { border-top: none; padding-top: 0; }
+  section.projects .proj-name { font-weight: 600; }
+  section.projects .proj-desc { color: var(--mid); margin-top: 2px; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <div>
+      <h1>— Full Name —</h1>
+      <div class="role">— Target Role / Headline —</div>
+    </div>
+    <div class="updated">Updated — Month Year —</div>
+  </header>
+
+  <div class="layout">
+    <!-- Left rail -->
+    <aside class="rail">
+      <section class="contact">
+        <h2 class="label">Contact</h2>
+        <dl>
+          <dt>Email</dt><dd>—</dd>
+          <dt>Phone</dt><dd>—</dd>
+          <dt>Location</dt><dd>—</dd>
+          <dt>LinkedIn</dt><dd>—</dd>
+          <dt>Portfolio</dt><dd>—</dd>
+        </dl>
+      </section>
+
+      <section class="skills">
+        <h2 class="label">Skills</h2>
+        <ul class="plain">
+          <li>— Skill —</li>
+          <li>— Skill —</li>
+          <li>— Skill —</li>
+          <li>— Skill —</li>
+          <li>— Skill —</li>
+          <li>— Skill —</li>
+        </ul>
+      </section>
+
+      <section class="languages">
+        <h2 class="label">Languages</h2>
+        <div class="lang-row"><span>— Language —</span><span class="level">— Level —</span></div>
+        <div class="lang-row"><span>— Language —</span><span class="level">— Level —</span></div>
+      </section>
+
+      <section class="education">
+        <h2 class="label">Education</h2>
+        <div class="edu-entry">
+          <div class="school">— Institution —</div>
+          <div class="degree">— Degree, Field —</div>
+          <div class="dates">— Year — to — Year —</div>
+        </div>
+      </section>
+    </aside>
+
+    <!-- Right column -->
+    <main class="main">
+      <section class="summary-section">
+        <h2 class="label">Profile</h2>
+        <p class="summary">— One or two sentences summarizing your experience, the kind of role you're targeting, and what you're best known for. —</p>
+      </section>
+
+      <section class="experience">
+        <h2 class="label">Experience</h2>
+        <ul class="timeline">
+          <li class="entry">
+            <div class="row-head">
+              <div class="title-co">— Job Title — <span class="co">— Company —</span></div>
+              <div class="dates">— Month Year — to Present</div>
+            </div>
+            <ul class="bullets">
+              <li>— What you owned and the outcome, with a real number only if you have one. —</li>
+              <li>— A second responsibility or result. —</li>
+              <li>— A third, if relevant. —</li>
+            </ul>
+          </li>
+          <li class="entry">
+            <div class="row-head">
+              <div class="title-co">— Job Title — <span class="co">— Company —</span></div>
+              <div class="dates">— Month Year — to — Month Year —</div>
+            </div>
+            <ul class="bullets">
+              <li>— What you owned and the outcome. —</li>
+              <li>— A second responsibility or result. —</li>
+            </ul>
+          </li>
+          <li class="entry">
+            <div class="row-head">
+              <div class="title-co">— Job Title — <span class="co">— Company —</span></div>
+              <div class="dates">— Month Year — to — Month Year —</div>
+            </div>
+            <ul class="bullets">
+              <li>— What you owned and the outcome. —</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="projects">
+        <h2 class="label">Projects</h2>
+        <ul class="plain-projects">
+          <li>
+            <div class="proj-name">— Project name —</div>
+            <div class="proj-desc">— One line on what it does and your role in it. —</div>
+          </li>
+          <li>
+            <div class="proj-name">— Project name —</div>
+            <div class="proj-desc">— One line on what it does and your role in it. —</div>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>

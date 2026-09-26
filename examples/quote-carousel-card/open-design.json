@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design one square (1:1) Instagram carousel card, card 1 of a set: an oversized pull-quote as the dominant typographic element, a minimal thin frame or margin, a small attribution line, and a real swipe/page-indicator dot row at the bottom (first dot filled, rest outlined) showing this is card 1 of several. Muted jewel-tone background (pick one: deep teal, plum, or ochre). No stock photo behind the quote, no gradient overlay. Use `—` for the quote/attribution if I haven't given you real copy."
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design an event flyer (portrait, letter-ish ratio) for a workshop or meetup: a solid color-block band across the top holding a bold sans-serif headline, then below it a structured info list (date, time, location, one-line description) with clear label/value pairs, and a simple RSVP/link line at the bottom. One accent color plus black/white. No fine-art gradient background, no stock photo, no invented attendee count. Use `—` placeholders for any details I haven't given you."
+      }
+    }
+  }
+}

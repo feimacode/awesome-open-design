@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a business card (standard 3.5×2in ratio, shown front-only): a single bold monogram/initial mark top-left, a thin full-width rule beneath it, and a right-aligned contact block (name, title, email, phone) in one accent color on a neutral off-white ground. No logo image, no gradient, no drop shadow — the monogram is drawn typographically, not a placeholder image."
+      }
+    }
+  }
+}

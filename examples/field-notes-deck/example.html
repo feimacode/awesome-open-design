@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Field Notes — Deck Opener</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBFBFA;
+    --paper-2: #F4F3F0;
+    --ink: #1A1A19;
+    --ink-soft: #555452;
+    --muted: #828079;
+    --hairline: #E5E3DE;
+    --display: 'Instrument Serif', 'Newsreader', Georgia, serif;
+    --sans: 'Inter Tight', 'SF Pro Display', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .deck { position: relative; width: 100vw; }
+  .slide {
+    position: relative;
+    width: 100vw; height: 100vh; min-height: 720px;
+    padding: 72px 96px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .slide + .slide { border-top: 1px solid var(--hairline); }
+
+  .meta-row {
+    position: absolute; top: 32px; left: 96px; right: 96px;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  }
+  .pagenum {
+    position: absolute; bottom: 32px; right: 96px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  }
+  .signature {
+    position: absolute; bottom: 32px; left: 96px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  }
+  .footrule {
+    position: absolute; bottom: 28px; left: 96px; right: 96px;
+    border: 0; border-top: 1px solid var(--hairline);
+  }
+
+  /* Cover */
+  .cover-slide { justify-content: center; }
+  h1.cover {
+    font-family: var(--display);
+    font-size: clamp(72px, 9vw, 132px);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.028em;
+    margin: 0;
+    max-width: 15ch;
+  }
+  h3.sub {
+    font-family: var(--display); font-style: italic; font-weight: 400;
+    font-size: 30px; line-height: 1.2; letter-spacing: -0.02em;
+    color: var(--ink-soft); margin: 20px 0 0;
+    max-width: 40ch;
+  }
+
+  /* Agenda */
+  .agenda-slide { justify-content: center; }
+  h2.title {
+    font-family: var(--display);
+    font-size: clamp(48px, 5.5vw, 76px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin: 0 0 48px;
+  }
+  ol.agenda {
+    list-style: none; margin: 0; padding: 0;
+    border-top: 1px solid var(--hairline);
+  }
+  ol.agenda li {
+    display: grid; grid-template-columns: 5ch 1fr;
+    align-items: baseline; gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  ol.agenda li .n {
+    font-family: var(--display); font-size: 30px; line-height: 1; letter-spacing: -0.02em;
+    color: var(--ink-soft);
+  }
+  ol.agenda li .t {
+    font-family: var(--display); font-size: 28px; letter-spacing: -0.012em; line-height: 1.2;
+  }
+
+  @media print {
+    .slide { height: auto; min-height: 100vh; page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 01 · Cover -->
+  <section class="slide cover-slide" data-title="Cover">
+    <div class="meta-row"><span>FIELD NOTES</span><span>— / 02</span></div>
+    <h1 class="cover">Field&nbsp;Notes</h1>
+    <h3 class="sub">— a working session, kept short.</h3>
+    <span class="signature">— · —</span>
+    <span class="pagenum">01 / 02</span>
+  </section>
+
+  <!-- 02 · Agenda -->
+  <section class="slide agenda-slide" data-title="Agenda">
+    <div class="meta-row"><span>FIELD NOTES</span><span>agenda</span></div>
+    <h2 class="title">Agenda</h2>
+    <ol class="agenda">
+      <li><span class="n">01</span><span class="t">—</span></li>
+      <li><span class="n">02</span><span class="t">—</span></li>
+      <li><span class="n">03</span><span class="t">—</span></li>
+      <li><span class="n">04</span><span class="t">—</span></li>
+    </ol>
+    <hr class="footrule">
+    <span class="pagenum">02 / 02</span>
+  </section>
+
+</div>
+</body>
+</html>

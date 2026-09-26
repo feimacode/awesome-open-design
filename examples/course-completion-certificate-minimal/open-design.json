@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a course-completion certificate with deliberate restraint: no border, no ornament, no seal. Just generous whitespace, the recipient's name set very large and centered, the course name beneath it in a smaller weight, and a single small-caps metadata row at the bottom (issuer · date · credential id). One typeface family only, one ink color. Use `—` placeholders for any specifics not given to you rather than inventing a course/issuer name."
+      }
+    }
+  }
+}

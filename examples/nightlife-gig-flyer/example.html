@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Afterglow — Gig Flyer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon: #ff2f7e;
+    --ink: #050505;
+    --paper: #f3f1ec;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: 'Space Grotesk', sans-serif;
+    display: grid;
+    place-items: center;
+    padding: 32px 0;
+  }
+  .flyer {
+    position: relative;
+    width: 1080px;
+    max-width: 94vw;
+    aspect-ratio: 9 / 16;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 64px 56px 48px;
+  }
+  .noise {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--neon);
+  }
+  .frame {
+    border: 1px solid rgba(243,241,236,0.35);
+    padding: 3px 10px;
+    display: inline-flex;
+    width: fit-content;
+  }
+  .titleblock {
+    margin: auto 0 0;
+  }
+  h1 {
+    margin: 0;
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.82;
+    letter-spacing: -0.01em;
+    font-size: 168px;
+  }
+  h1 .line2 {
+    color: var(--ink);
+    -webkit-text-stroke: 3px var(--neon);
+    margin-top: -0.14em;
+    display: block;
+    margin-left: 0.62em;
+  }
+  .tag {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(243,241,236,0.6);
+  }
+  .details {
+    margin-top: 56px;
+    border-top: 1px solid rgba(243,241,236,0.25);
+    padding-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 22px;
+    column-gap: 24px;
+  }
+  .field .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--neon);
+    margin-bottom: 6px;
+  }
+  .field .v {
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .field.wide { grid-column: 1 / -1; }
+  .footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(243,241,236,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: rgba(243,241,236,0.7);
+  }
+  .footer .dot { color: var(--neon); }
+</style>
+</head>
+<body>
+<div class="flyer">
+  <div class="noise"></div>
+
+  <div class="frame eyebrow">DOORS · 22:00</div>
+
+  <div class="titleblock">
+    <h1>AFTER<span class="line2">GLOW</span></h1>
+    <div class="tag">— an all-night set, one room, one system —</div>
+
+    <div class="details">
+      <div class="field">
+        <div class="k">Date</div>
+        <div class="v">—</div>
+      </div>
+      <div class="field">
+        <div class="k">Venue</div>
+        <div class="v">—</div>
+      </div>
+      <div class="field wide">
+        <div class="k">Lineup</div>
+        <div class="v">— · — · —</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>18+ · ID required</span>
+    <span class="dot">●</span>
+    <span>tickets — </span>
+  </div>
+</div>
+</body>
+</html>

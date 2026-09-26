@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Build a two-column resume: a narrow left rail (contact info, skills list, languages) separated from a wider right column (work experience as a timeline with a thin vertical rule) by a single hairline divider. Pure black-on-white, one sans-serif family, no photo, no icons, no color accent. Use my real name/role/experience if I give it to you, otherwise leave clearly labeled placeholders rather than inventing a career history."
+      }
+    }
+  }
+}

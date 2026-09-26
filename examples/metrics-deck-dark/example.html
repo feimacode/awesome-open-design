@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Metrics — Single Stat Slide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #0a0a0a;
+  --green: #4ade80;
+  --green-dim: rgba(74, 222, 128, 0.38);
+  --green-faint: rgba(74, 222, 128, 0.14);
+  --text-dim: rgba(232, 228, 216, 0.45);
+  --border: rgba(74, 222, 128, 0.16);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Instrument Serif', Georgia, serif;
+  background: var(--bg);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: clamp(24px, 6vw, 80px);
+}
+
+.slide {
+  width: 100%;
+  max-width: 1040px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(28px, 5vh, 56px);
+}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: clamp(11px, 1.2vw, 13px);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.stat {
+  font-size: clamp(120px, 22vw, 280px);
+  line-height: 0.9;
+  font-weight: 400;
+  letter-spacing: -2px;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: clamp(13px, 1.6vw, 16px);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: clamp(-8px, -1vh, -16px);
+}
+
+.rule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+.metrics-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 4vw, 48px);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metric-val {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  color: var(--green-dim);
+  letter-spacing: -0.5px;
+}
+
+.metric-label {
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: clamp(9px, 1vw, 11px);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+@media (max-width: 640px) {
+  .metrics-row { grid-template-columns: 1fr; gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <p class="eyebrow">All-Hands · Metrics Review</p>
+
+  <div>
+    <div class="stat">— %</div>
+    <p class="stat-label">Growth, Month Over Month</p>
+  </div>
+
+  <div class="rule"></div>
+
+  <div class="metrics-row">
+    <div class="metric">
+      <span class="metric-val">—</span>
+      <span class="metric-label">Active Users</span>
+    </div>
+    <div class="metric">
+      <span class="metric-val">—</span>
+      <span class="metric-label">Retention, 30-Day</span>
+    </div>
+    <div class="metric">
+      <span class="metric-val">—</span>
+      <span class="metric-label">Net Revenue Retention</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Metrics Review</span>
+    <span>01 / 01</span>
+  </div>
+</section>
+
+</body>
+</html>

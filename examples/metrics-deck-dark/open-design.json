@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a single dark-mode metrics slide for an investor/all-hands deck: near-black background, one large monochromatic-green headline stat dominating the slide, a short label beneath it, and 2-3 smaller supporting metrics in a row along the bottom in the same green at lower opacity. No chart-junk, no icon decoration. Since I haven't given you real numbers, render the stat as a clearly-labeled placeholder (e.g. `— %`), not a fabricated figure."
+      }
+    }
+  }
+}

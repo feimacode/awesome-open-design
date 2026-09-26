@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificate of Achievement</title>
+<style>
+  :root{
+    --page: #ece8de;
+    --paper: #faf8f2;
+    --ink: #1a1a17;
+    --muted: #6b675e;
+    --accent: #1b365d;
+    --rule: #1a1a17;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--page);color:var(--ink);}
+  body{
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:32px 16px;
+  }
+  .sheet{
+    width:1056px;
+    height:816px;
+    max-width:100%;
+    background:var(--paper);
+    position:relative;
+    padding:40px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  }
+  .rule-outer{
+    position:absolute;
+    inset:24px;
+    border:1px solid var(--ink);
+  }
+  .rule-inner{
+    position:absolute;
+    inset:32px;
+    border:1px solid var(--ink);
+  }
+  .content{
+    position:relative;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:56px 96px;
+  }
+  .eyebrow{
+    font-family: "JetBrains Mono", "Courier New", monospace;
+    font-size:11px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 22px;
+  }
+  h1{
+    font-size:44px;
+    font-weight:400;
+    letter-spacing:0.02em;
+    margin:0 0 30px;
+    line-height:1.1;
+  }
+  .presented{
+    font-family: "JetBrains Mono", "Courier New", monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 14px;
+  }
+  .recipient{
+    font-size:34px;
+    font-style:italic;
+    color:var(--accent);
+    margin:0 0 26px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--ink);
+    display:inline-block;
+    min-width:420px;
+  }
+  .achievement{
+    font-size:16px;
+    line-height:1.65;
+    max-width:560px;
+    color:var(--ink);
+    margin:0 0 8px;
+  }
+  .achievement .field{
+    color:var(--muted);
+  }
+  .meta-line{
+    font-family: "JetBrains Mono", "Courier New", monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:34px 0 0;
+  }
+  .seal{
+    margin:30px 0 8px;
+  }
+  .sign-row{
+    position:absolute;
+    left:96px;
+    right:96px;
+    bottom:70px;
+    display:flex;
+    justify-content:space-between;
+    gap:60px;
+  }
+  .sign{
+    flex:1;
+    text-align:center;
+  }
+  .sign-line{
+    border-top:1px solid var(--ink);
+    padding-top:8px;
+    font-family: "JetBrains Mono", "Courier New", monospace;
+    font-size:10px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  @media (max-width: 720px){
+    .sheet{ width:100%; height:auto; aspect-ratio:1056/816; padding:20px; }
+    .content{ padding:24px 20px; }
+    h1{ font-size:28px; }
+    .recipient{ font-size:22px; min-width:0; width:100%; }
+    .sign-row{ left:24px; right:24px; bottom:24px; gap:20px; }
+  }
+</style>
+</head>
+<body>
+  <div class="sheet" data-od-id="certificate">
+    <div class="rule-outer"></div>
+    <div class="rule-inner"></div>
+    <div class="content">
+      <p class="eyebrow">— Issuing Organization —</p>
+
+      <svg class="seal" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="#1b365d" stroke-width="1"/>
+        <circle cx="32" cy="32" r="24" fill="none" stroke="#1b365d" stroke-width="1"/>
+        <path d="M32 12 L32 52 M12 32 L52 32" stroke="#1b365d" stroke-width="1"/>
+        <path d="M20 20 L44 44 M44 20 L20 44" stroke="#1b365d" stroke-width="1"/>
+        <circle cx="32" cy="32" r="4" fill="#1b365d"/>
+      </svg>
+
+      <h1>Certificate of Achievement</h1>
+
+      <p class="presented">This certificate is presented to</p>
+      <p class="recipient">— Recipient Name —</p>
+
+      <p class="achievement">
+        In recognition of <span class="field">— the achievement being recognized —</span>,
+        completed with distinction on <span class="field">— date —</span>.
+      </p>
+
+      <p class="meta-line">Certificate No. — · Issued — </p>
+    </div>
+
+    <div class="sign-row">
+      <div class="sign">
+        <div class="sign-line">— Signature — · Program Lead</div>
+      </div>
+      <div class="sign">
+        <div class="sign-line">— Signature — · Date</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

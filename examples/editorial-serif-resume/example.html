@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>— · Résumé</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --sub: #6b6862;
+    --rule: #dedad2;
+    --paper: #fdfcf9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #e8e6e0;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    padding: 40px 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 26mm 24mm;
+    box-shadow: 0 30px 70px -30px rgba(0,0,0,0.22);
+  }
+  header {
+    margin-bottom: 40px;
+  }
+  h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 500;
+    font-size: 46px;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    line-height: 1.05;
+  }
+  .role-line {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--sub);
+    margin-bottom: 16px;
+  }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 18px;
+    font-size: 12px;
+    color: var(--sub);
+    letter-spacing: 0.02em;
+  }
+  .contact span:not(:last-child)::after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background: var(--rule);
+    margin-left: 18px;
+    vertical-align: middle;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    display: inline-block;
+    padding-bottom: 5px;
+    margin: 0 0 20px;
+  }
+  section { margin-bottom: 34px; }
+  section:last-child { margin-bottom: 0; }
+
+  .entry { margin-bottom: 22px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+  .entry-title {
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+  .entry-org {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    color: var(--sub);
+    font-weight: 400;
+  }
+  .entry-date {
+    font-size: 11.5px;
+    color: var(--sub);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .entry p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #322f2a;
+    margin: 0;
+  }
+  .entry ul {
+    margin: 6px 0 0;
+    padding: 0 0 0 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #322f2a;
+  }
+  .entry li { margin-bottom: 3px; }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: var(--sub);
+    padding: 9px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .meta-row:first-of-type { border-top: none; }
+  .meta-row span:first-child { color: var(--ink); }
+
+  .skills {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #322f2a;
+  }
+
+  footer {
+    margin-top: 44px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+    color: var(--sub);
+    text-align: center;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>— —</h1>
+    <div class="role-line">— role / title placeholder —</div>
+    <div class="contact">
+      <span>— city, country —</span>
+      <span>— email —</span>
+      <span>— phone —</span>
+      <span>— portfolio / LinkedIn url —</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">Profile</div>
+    <p style="font-size:13.5px; line-height:1.8; color:#322f2a; margin:0;">
+      — one to two sentences summarizing your background, focus area, and what you're looking for next. —
+    </p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Experience</div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <div class="entry-title">— Job Title <span class="entry-org">— Company Name</span></div>
+        <div class="entry-date">— start — — end —</div>
+      </div>
+      <ul>
+        <li>— responsibility or outcome, described plainly —</li>
+        <li>— responsibility or outcome, described plainly —</li>
+        <li>— responsibility or outcome, described plainly —</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <div class="entry-title">— Job Title <span class="entry-org">— Company Name</span></div>
+        <div class="entry-date">— start — — end —</div>
+      </div>
+      <ul>
+        <li>— responsibility or outcome, described plainly —</li>
+        <li>— responsibility or outcome, described plainly —</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <div class="entry-title">— Job Title <span class="entry-org">— Company Name</span></div>
+        <div class="entry-date">— start — — end —</div>
+      </div>
+      <ul>
+        <li>— responsibility or outcome, described plainly —</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Education</div>
+    <div class="meta-row">
+      <span>— Degree, Field of Study</span>
+      <span>— Institution — · — years —</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Skills</div>
+    <p class="skills">— skill —, — skill —, — skill —, — skill —, — skill —, — skill —, — skill —</p>
+  </section>
+
+  <footer>
+    References available on request
+  </footer>
+
+</div>
+</body>
+</html>

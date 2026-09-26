@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a nightlife/gig event flyer (portrait): near-black background, a single neon accent color (pick one: acid green, electric pink, or cyan), and the event name set in large stacked/overlapping bold type as the dominant visual element. Include a smaller structured line for date/venue/lineup beneath it. No gradient glow effects standing in for real design, no stock photography, no emoji. Use `—` placeholders for lineup/date details not given to you."
+      }
+    }
+  }
+}

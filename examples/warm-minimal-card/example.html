@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Warm Minimal Business Card</title>
+<style>
+  :root{
+    --page-bg: #e7e1d6;
+    --card-bg: #f4ede1;
+    --ink: #2b2621;
+    --muted: #6f6558;
+    --mark: #a8623c;
+  }
+  *{ box-sizing: border-box; }
+  html,body{
+    margin:0; padding:0; height:100%;
+    background: var(--page-bg);
+    display:flex; align-items:center; justify-content:center;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  .stage{
+    padding: 48px;
+  }
+  .card{
+    position: relative;
+    width: 336px;
+    height: 192px;
+    background: var(--card-bg);
+    border: 1px solid rgba(43,38,33,0.12);
+    overflow: hidden;
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .mark{
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 34px;
+    height: 34px;
+  }
+  .name{
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 6px 0;
+  }
+  .title{
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+  }
+  .contact{
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .contact span{
+    color: var(--muted);
+    display: inline-block;
+    width: 52px;
+  }
+  .caption{
+    margin-top: 18px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="card">
+      <svg class="mark" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="17" cy="17" r="14" stroke="#a8623c" stroke-width="1.6"/>
+      </svg>
+      <div class="name">— Name —</div>
+      <div class="title">— Title —</div>
+      <div class="contact">
+        <div><span>Email</span>—</div>
+        <div><span>Phone</span>—</div>
+        <div><span>Web</span>—</div>
+      </div>
+    </div>
+    <div class="caption">3.5 × 2 in — front</div>
+  </div>
+</body>
+</html>

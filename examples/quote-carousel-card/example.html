@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quote carousel — card 1 of 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --teal: #0f3d3a;
+    --teal-ink: #eef4f2;
+    --teal-line: rgba(238,244,242,0.28);
+    --teal-dim: rgba(238,244,242,0.55);
+    --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #08201e;
+    font: 14px/1.5 -apple-system, system-ui, sans-serif;
+    padding: 40px 16px;
+  }
+
+  .card {
+    width: 560px;
+    aspect-ratio: 1 / 1;
+    background: var(--teal);
+    color: var(--teal-ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .frame {
+    position: absolute;
+    inset: 28px;
+    border: 1px solid var(--teal-line);
+  }
+
+  .index {
+    position: absolute;
+    top: 52px; left: 52px;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    color: var(--teal-dim);
+    text-transform: uppercase;
+  }
+
+  .mark {
+    position: absolute;
+    top: 44px; right: 52px;
+    font: italic 400 64px/1 var(--serif);
+    color: var(--teal-line);
+  }
+
+  .quote {
+    position: absolute;
+    left: 52px; right: 52px;
+    top: 50%;
+    transform: translateY(-52%);
+    margin: 0;
+    font: 400 44px/1.18 var(--serif);
+    letter-spacing: -0.005em;
+  }
+  .quote em { font-style: italic; color: var(--teal-dim); }
+
+  .attribution {
+    position: absolute;
+    left: 52px; right: 52px;
+    bottom: 108px;
+    font: 12px/1.4 var(--mono);
+    letter-spacing: 0.04em;
+    color: var(--teal-dim);
+  }
+  .attribution .rule {
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--teal-line);
+    margin-bottom: 14px;
+  }
+
+  .dots {
+    position: absolute;
+    left: 52px; bottom: 56px;
+    display: flex;
+    gap: 10px;
+  }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    border: 1px solid var(--teal-dim);
+    background: transparent;
+  }
+  .dot.filled { background: var(--teal-ink); border-color: var(--teal-ink); }
+
+  .counter {
+    position: absolute;
+    right: 52px; bottom: 54px;
+    font: 11px/1 var(--mono);
+    letter-spacing: 0.14em;
+    color: var(--teal-dim);
+  }
+
+  @media (max-width: 620px) {
+    .card { width: min(92vw, 480px); }
+    .quote { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+  <article class="card" data-od-id="card">
+    <div class="frame"></div>
+    <div class="index">Field Notes · 01</div>
+    <div class="mark">&ldquo;</div>
+
+    <p class="quote">&mdash;<br/><em>&mdash;</em></p>
+
+    <div class="attribution">
+      <span class="rule"></span>
+      &mdash;
+    </div>
+
+    <div class="dots" data-od-id="swipe-dots">
+      <span class="dot filled"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    <div class="counter">01 / 04</div>
+  </article>
+</body>
+</html>

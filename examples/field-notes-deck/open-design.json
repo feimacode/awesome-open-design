@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a two-slide pitch deck opener called 'Field Notes' — slide one is a cover with an oversized serif title, a one-line subtitle, and a small presenter/date line bottom-left; slide two is a numbered agenda (4-6 items) using a thin horizontal rule between each entry. Cream background, near-black charcoal text, no accent color beyond the rule lines. No gradients, no stock photography, no icon bullets — numerals only. Use `—` placeholders for any presenter name/date/agenda copy I haven't given you."
+      }
+    }
+  }
+}

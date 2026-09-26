@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Build a single-column, editorial-style resume: name set in a large serif headline, small-caps tracked section labels (Experience, Education, Skills), sans-serif body copy, generous whitespace, no sidebar, no photo, no color accent beyond black/off-white. Use my real content if provided, otherwise leave honest `—` placeholders instead of a fabricated resume."
+      }
+    }
+  }
+}

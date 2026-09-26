@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monogram + Rule Business Card</title>
+<style>
+  :root{
+    --page-bg: #e7e4dc;
+    --card-bg: #faf8f2;
+    --ink: #1c1a17;
+    --accent: #1f3a5f;
+    --border: #d8d3c4;
+  }
+  *{ box-sizing: border-box; }
+  html,body{
+    margin:0;
+    padding:0;
+    background: var(--page-bg);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+  }
+  body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 48px 16px;
+  }
+  .stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+  .card{
+    width: 336px;
+    height: 192px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow:hidden;
+    padding: 26px 28px 22px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .mark{
+    display:flex;
+    align-items:flex-start;
+  }
+  .mark svg{
+    width: 64px;
+    height: 64px;
+    display:block;
+  }
+  .mark text{
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: 58px;
+    font-weight: 600;
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.4;
+    stroke-dasharray: 3 3;
+  }
+  .rule{
+    width: 100%;
+    height: 1px;
+    background: var(--ink);
+    opacity: 0.85;
+    margin: 0;
+  }
+  .contact{
+    align-self: flex-end;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .contact .name{
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .contact .title{
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 2px;
+  }
+  .contact .detail{
+    font-size: 10.5px;
+    color: var(--ink);
+    opacity: 0.75;
+    margin-top: 6px;
+  }
+  .caption{
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 11px;
+    color: var(--ink);
+    opacity: 0.45;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="card" role="img" aria-label="Business card front: a dashed placeholder monogram letter A top left, a thin rule beneath it, and a right-aligned contact block reading placeholder name, title, email and phone in navy ink on an off-white ground.">
+      <div class="mark">
+        <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <text x="2" y="56">A</text>
+        </svg>
+      </div>
+
+      <div class="rule"></div>
+
+      <div class="contact">
+        <div class="name">—</div>
+        <div class="title">—</div>
+        <div class="detail">— · —</div>
+      </div>
+    </div>
+    <div class="caption">3.5&#8243; &times; 2&#8243; — front only. Swap the dashed "A" for a real initial and fill the contact block.</div>
+  </div>
+</body>
+</html>

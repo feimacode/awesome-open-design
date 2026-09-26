@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a bold birthday party invitation (portrait card): high-contrast color-block background, the age/number set as a huge playful numeral as the dominant graphic element, the 'you're invited' headline beneath it, and a clear info block (date, time, location, RSVP) in a smaller consistent weight. One or two saturated accent colors, no gradients, no stock party-clipart (balloons/confetti icons). Use `—` placeholders for any details not given to you."
+      }
+    }
+  }
+}

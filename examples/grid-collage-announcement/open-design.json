@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a square (1:1) Instagram announcement post using an asymmetric 3-panel grid layout (e.g. one large panel + two stacked smaller panels) where panels are solid color blocks and typographic content, not photos. Include a small-caps label tag like 'NEW' or 'OUT NOW' in one panel, and the announcement headline in another. One accent color plus neutral blocks — no gradients, no stock imagery, no emoji in the label tag."
+      }
+    }
+  }
+}

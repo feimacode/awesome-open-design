@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a modern wedding invitation (portrait card): serif display type for the couple's names, a muted sage-green and terracotta palette, a short ceremony/reception detail block (date, time, venue), and a simple RSVP line at the bottom. No floral clipart, no gradient background, no stock photography — decorative elements should be simple drawn linework (e.g. a thin botanical line sketch) if used at all. Use `—` placeholders for names/date/venue I haven't given you."
+      }
+    }
+  }
+}

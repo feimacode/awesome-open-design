@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modern Wedding Invitation</title>
+<style>
+  :root{
+    --sage:#8a9a7e;
+    --sage-deep:#5f6f54;
+    --terracotta:#c17a56;
+    --paper:#f7f4ee;
+    --ink:#2c2a26;
+    --ink-muted:#6b6559;
+    --rule: rgba(44,42,38,0.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:#e9e4d8;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:48px 16px;
+    font-family: Georgia, "Iowan Old Style", Charter, serif;
+  }
+  .card{
+    width:100%;
+    max-width:480px;
+    aspect-ratio: 5 / 7;
+    background:var(--paper);
+    color:var(--ink);
+    padding:56px 44px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 12px 32px rgba(44,42,38,0.10);
+    position:relative;
+  }
+  .motif{
+    width:120px;
+    height:auto;
+    color:var(--sage-deep);
+    margin-bottom:20px;
+  }
+  .eyebrow{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin:0 0 18px;
+  }
+  .names{
+    font-size:40px;
+    line-height:1.15;
+    margin:0;
+    font-weight:400;
+    letter-spacing:0.01em;
+  }
+  .ampersand{
+    display:block;
+    font-style:italic;
+    font-size:24px;
+    color:var(--sage-deep);
+    margin:6px 0;
+  }
+  .rule{
+    width:56px;
+    height:1px;
+    background:var(--rule);
+    margin:26px 0;
+  }
+  .invite-line{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    color:var(--ink-muted);
+    max-width:280px;
+    line-height:1.7;
+    margin:0 0 26px;
+  }
+  .details{
+    font-size:15px;
+    line-height:2;
+    color:var(--ink);
+  }
+  .details .venue{
+    font-style:italic;
+    color:var(--sage-deep);
+  }
+  .footer{
+    margin-top:auto;
+    padding-top:28px;
+  }
+  .rsvp{
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-muted);
+  }
+  .rsvp span{
+    color:var(--terracotta);
+  }
+</style>
+</head>
+<body>
+  <main class="card" data-od-id="invitation-card">
+    <svg class="motif" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M60 30 C 46 12, 24 12, 14 22 C 24 30, 42 32, 60 30 Z" stroke="currentColor" stroke-width="1"/>
+      <path d="M60 30 C 74 12, 96 12, 106 22 C 96 30, 78 32, 60 30 Z" stroke="currentColor" stroke-width="1"/>
+      <path d="M14 22 C 10 30, 12 40, 20 46" stroke="currentColor" stroke-width="0.75"/>
+      <path d="M106 22 C 110 30, 108 40, 100 46" stroke="currentColor" stroke-width="0.75"/>
+      <circle cx="60" cy="30" r="2" fill="currentColor"/>
+    </svg>
+
+    <p class="eyebrow">Together with their families</p>
+
+    <h1 class="names">
+      —
+      <span class="ampersand">&amp;</span>
+      —
+    </h1>
+
+    <div class="rule"></div>
+
+    <p class="invite-line">request the pleasure of your company as they exchange vows and celebrate the beginning of their life together</p>
+
+    <div class="details">
+      — <br>
+      at — o'clock <br>
+      <span class="venue">— Venue —</span>
+    </div>
+
+    <div class="footer">
+      <p class="rsvp">Kindly RSVP by — &nbsp;·&nbsp; <span>—@—.com</span></p>
+    </div>
+  </main>
+</body>
+</html>
