@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Create a minimal, print-ready course completion certificate on a landscape 11×8.5 inch sheet. Use a warm off-white background with elegant serif typography (Georgia) for the recipient name in large display size, a thin horizontal rule divider, the course name in italic below, and a metadata line at the bottom in small sans-serif uppercase text showing the issuer, date, and credential ID separated by dots. Include honest em-dash placeholders for all variable fields. Keep the design restrained — no borders, seals, or decorative elements. Make it print-friendly with @media print rules."
+      }
+    }
+  }
+}
