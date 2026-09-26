@@ -1,0 +1,48 @@
+name: Update example thumbnails
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "examples/**/example.html"
+      - "examples/**/SKILL.md"
+      - "scripts/generate-thumbnails.js"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thumbnails-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  thumbnails:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate thumbnails
+        run: npm run thumbnails
+
+      - name: Commit updated thumbnails
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add 'examples/*/thumbnail.png' README.md
+          if git diff --staged --quiet; then
+            echo "No thumbnail changes"
+          else
+            git commit -m "chore: regenerate example thumbnails [skip ci]"
+            git push
+          fi

@@ -1,0 +1,14 @@
+{
+  "name": "awesome-open-design",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Community-contributed remixable designs for OpenDesign Agent Kit.",
+  "scripts": {
+    "thumbnails": "node scripts/generate-thumbnails.js"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0",
+    "playwright": "^1.47.0",
+    "sharp": "^0.35.4"
+  }
+}
