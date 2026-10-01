@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Build a 1600×900 launch/social card (X/Twitter landscape post size) for the Open Design Agent Kit — pro-grade design built into the coding agent you already use. Dark technical aesthetic: near-black background, subtle grid texture that fades out via a radial mask, Inter + JetBrains Mono. Headline: 'Pro-grade design, built into the coding agent you already use.' with the second clause in muted gray. Subhead: skills, brand design systems and remixable examples running inside Copilot, Claude Code, Codex, Cursor and any MCP agent. A 'ships as' row of three pill chips with line icons: Agent skills (Claude Code · Codex), VS Code extension (Copilot Chat), MCP server (Cursor + any agent). Four stat cells: 163 skills, 114 design templates, 152 brand design systems, 167 remixable examples. Proof row of checkmarks: No desktop app, No daemon, No API keys, Plain files in your repo. Footer: '$ npx @feimacode/open-design-agent-kit init' on the left, an awesome-open-design community-designs badge on the right. Exactly one blue accent color, used only for the eyebrow tag and small highlights; no photos, no emoji icons."
+      }
+    }
+  }
+}
