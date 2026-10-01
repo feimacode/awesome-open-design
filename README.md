@@ -96,11 +96,15 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <sub><a href="examples/now-page">Now Page</a></sub>
 </td>
 <td align="center" width="33%">
-<a href="examples/quote-carousel-card"><img src="examples/quote-carousel-card/thumbnail.png" width="280" alt="Quote Carousel Card"></a><br />
-<sub><a href="examples/quote-carousel-card">Quote Carousel Card</a></sub>
+<a href="examples/open-design-agent-kit-launch"><img src="examples/open-design-agent-kit-launch/thumbnail.png" width="280" alt="Open Design Agent Kit — Launch Card"></a><br />
+<sub><a href="examples/open-design-agent-kit-launch">Open Design Agent Kit — Launch Card</a></sub>
 </td>
 </tr>
 <tr>
+<td align="center" width="33%">
+<a href="examples/quote-carousel-card"><img src="examples/quote-carousel-card/thumbnail.png" width="280" alt="Quote Carousel Card"></a><br />
+<sub><a href="examples/quote-carousel-card">Quote Carousel Card</a></sub>
+</td>
 <td align="center" width="33%">
 <a href="examples/two-column-mono-resume"><img src="examples/two-column-mono-resume/thumbnail.png" width="280" alt="Two-Column Monochrome Resume"></a><br />
 <sub><a href="examples/two-column-mono-resume">Two-Column Monochrome Resume</a></sub>
@@ -109,17 +113,16 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <a href="examples/warm-birthday-card"><img src="examples/warm-birthday-card/thumbnail.png" width="280" alt="Warm Birthday Card"></a><br />
 <sub><a href="examples/warm-birthday-card">Warm Birthday Card</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/warm-minimal-card"><img src="examples/warm-minimal-card/thumbnail.png" width="280" alt="Warm Minimal Business Card"></a><br />
 <sub><a href="examples/warm-minimal-card">Warm Minimal Business Card</a></sub>
 </td>
-</tr>
-<tr>
 <td align="center" width="33%">
 <a href="examples/workshop-meetup-flyer"><img src="examples/workshop-meetup-flyer/thumbnail.png" width="280" alt="Workshop / Meetup Flyer"></a><br />
 <sub><a href="examples/workshop-meetup-flyer">Workshop / Meetup Flyer</a></sub>
 </td>
-<td></td>
 <td></td>
 </tr>
 </table>
