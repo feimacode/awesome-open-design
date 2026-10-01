@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Open Design Agent Kit — Launch</title>
+<meta name="viewport" content="width=1600">
+<style>
+  :root{
+    --bg:#0f0f0f; --surface:#171717; --fg:#f0f0f0; --muted:#9ca3af;
+    --border:rgba(255,255,255,.08); --accent:#3B82F6;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+    --sans:Inter,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  html,body{background:#000}
+  body{display:flex;justify-content:center}
+  .card{
+    position:relative;width:1600px;height:900px;overflow:hidden;
+    background:var(--bg);color:var(--fg);font-family:var(--sans);
+    padding:64px 80px;display:flex;flex-direction:column;
+  }
+  .card::before{ /* subtle grid texture */
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse at 30% 40%,#000 0%,transparent 75%);
+            mask-image:radial-gradient(ellipse at 30% 40%,#000 0%,transparent 75%);
+  }
+  .card>*{position:relative}
+  .top{display:flex;justify-content:space-between;align-items:center}
+  .tag{
+    font:600 20px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--accent);padding:10px 16px;border-radius:999px;
+  }
+  .by{font:500 22px/1 var(--mono);color:var(--muted)}
+  h1{
+    margin-top:40px;font-weight:800;font-size:80px;line-height:1.06;letter-spacing:-.03em;max-width:1440px;
+  }
+  h1 span{color:var(--muted);font-weight:700}
+  .sub{margin-top:24px;margin-bottom:28px;font-size:28px;line-height:1.4;color:var(--muted);max-width:1200px}
+  .sub b{color:var(--fg);font-weight:600}
+  .ships{margin-top:auto;display:flex;align-items:center;gap:16px;margin-bottom:28px}
+  .ships .lbl{font:600 18px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+  .ships,.chip,.ships .lbl{white-space:nowrap}
+  .ships{gap:12px}
+  .chip{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:12px 18px;font:600 22px/1 var(--sans)}
+  .chip em{font:500 15px/1 var(--mono);font-style:normal;color:var(--muted)}
+  .chip svg{width:26px;height:26px;stroke:var(--fg);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 26px}
+  .stat .n{font:800 56px/1 var(--sans);letter-spacing:-.03em}
+  .stat .l{margin-top:8px;font:500 20px/1.2 var(--sans);color:var(--muted)}
+  .proof{margin-top:28px;display:flex;gap:36px;font:500 22px/1 var(--sans);color:var(--fg)}
+  .proof span{display:flex;align-items:center;gap:10px}
+  .proof svg{width:22px;height:22px;stroke:var(--fg);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .foot{margin-top:28px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+  .cmd{font:500 24px/1 var(--mono);color:var(--fg)}
+  .cmd i{font-style:normal;color:var(--muted)}
+  .awesome{font:500 22px/1 var(--mono);color:var(--muted);display:flex;align-items:center;gap:12px}
+  .awesome svg{width:24px;height:24px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linejoin:round}
+  .awesome b{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<main class="card" data-od-card>
+  <div class="top">
+    <div class="tag">Launch</div>
+    <div class="by">feimacode / open-design-agent-kit</div>
+  </div>
+
+  <h1>Pro-grade design, built into the coding agent <span>you already use.</span></h1>
+  <p class="sub">Open Design's skills, brand design systems and remixable examples inside <b>Copilot, Claude Code, Codex, Cursor</b> and any MCP agent.</p>
+
+  <div class="ships">
+    <span class="lbl">Ships as</span>
+    <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>Agent skills<em>Claude Code · Codex</em></span>
+    <span class="chip"><svg viewBox="0 0 24 24"><path d="M16 3l5 2.5v13L16 21l-9-8 9-8z"/><path d="M7 12L3 9v6l4-3"/></svg>VS Code extension<em>Copilot Chat</em></span>
+    <span class="chip"><svg viewBox="0 0 24 24"><path d="M8 4v6M16 4v6M6 10h12v3a6 6 0 0 1-12 0z"/><path d="M12 19v2"/></svg>MCP server<em>Cursor + any agent</em></span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">163</div><div class="l">skills</div></div>
+    <div class="stat"><div class="n">114</div><div class="l">design templates</div></div>
+    <div class="stat"><div class="n">152</div><div class="l">brand design systems</div></div>
+    <div class="stat"><div class="n">167</div><div class="l">remixable examples</div></div>
+  </div>
+
+  <div class="proof">
+    <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>No desktop app</span>
+    <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>No daemon</span>
+    <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>No API keys</span>
+    <span><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Plain files in your repo</span>
+  </div>
+
+  <div class="foot">
+    <div class="cmd"><i>$</i> npx @feimacode/open-design-agent-kit init</div>
+    <div class="awesome">
+      <svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>
+      <span>+ <b>awesome-open-design</b> · community designs</span>
+    </div>
+  </div>
+</main>
+</body>
+</html>
