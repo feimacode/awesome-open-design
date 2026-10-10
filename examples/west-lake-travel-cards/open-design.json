@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Make a Xiaohongshu travel-guide card carousel for Hangzhou West Lake \u2014 seven vertical 1080\u00d71440 (3:4) cards in Chinese, all in one self-contained HTML file. Warm cream paper (#FBF2EA) with rose and sage accents and brown ink, rounded 40px card corners, soft shadows, decorative blurred color blobs, and CJK system fonts (PingFang SC / Microsoft YaHei). Card 1 is a centered cover: a rose \u2018\u5efa\u8bae\u6536\u85cf\u2019 pill tag, a short rose divider, a huge two-line Chinese title with an English subtitle, and a rose-deep eyebrow line. Card 2 lists two highlights as white rows with emoji icon tiles (free admission all year; best sunrise/sunset times). Cards 3\u20136 use one identical spot template for \u4e09\u6f6d\u5370\u6708, \u82cf\u5802, \u96f7\u5cf0\u5854, \u65ad\u6865 \u2014 a page-number badge, a rose overline, the CN+EN spot name, a \ud83d\udccd location pill, a white description card, and two sage-gradient stat chips carrying the real facts (distance, walking time, opening hours, ticket facts). Card 7 closes with a two-day route flow of pill stops joined by arrows and a rose-gradient CTA box asking readers to like, save and follow, with three action buttons. Every card carries a small page badge and a watermark handle (a placeholder the user swaps for their own). All facts \u2014 prices, hours, distances, addresses \u2014 must come from me or be verified; never invent them. Emoji are fine as decoration, this is for Xiaohongshu."
+      }
+    }
+  }
+}
