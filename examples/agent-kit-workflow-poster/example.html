@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080">
+<title>Four steps from prompt to published — Open Design Agent Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=STIX+Two+Text:ital,wght@0,600;0,700;1,600&family=Source+Code+Pro:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #BBF351;
+    --secondary: #00BCFF;
+    --text: #111827;
+    --surface: #FFFFFF;
+    --bg: var(--text);
+    --fg: rgba(255, 255, 255, 0.94);
+    --muted: rgba(255, 255, 255, 0.68);
+    --border: rgba(255, 255, 255, 0.12);
+    --card: rgba(255, 255, 255, 0.04);
+    --font-body: "Roboto", system-ui, sans-serif;
+    --font-display: "STIX Two Text", Georgia, serif;
+    --font-mono: "Source Code Pro", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0a0e17; }
+  body { font-family: var(--font-body); color: var(--fg); }
+
+  .poster {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    margin: 0 auto;
+    padding: 64px 64px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 8% 40%, rgba(187, 243, 81, 0.14), transparent 36%),
+      radial-gradient(circle at 96% 78%, rgba(0, 188, 255, 0.16), transparent 40%),
+      var(--bg);
+  }
+  .poster::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .poster > * { position: relative; z-index: 1; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--primary);
+    text-shadow: 0 0 12px rgba(187, 243, 81, 0.6);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 12px var(--primary);
+  }
+  h1 {
+    margin-top: 20px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 84px;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--secondary);
+    text-shadow: 0 0 24px rgba(0, 188, 255, 0.55);
+  }
+
+  /* Steps */
+  .steps {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+    position: relative;
+  }
+  .steps::before {
+    content: "";
+    position: absolute;
+    left: 31px;
+    top: 40px;
+    bottom: 40px;
+    width: 3px;
+    background: repeating-linear-gradient(180deg, var(--primary) 0 10px, transparent 10px 20px);
+    box-shadow: 0 0 14px rgba(187, 243, 81, 0.5);
+    animation: flow 1.4s linear infinite;
+  }
+  .step {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 66px 1fr 380px;
+    align-items: center;
+    gap: 24px;
+  }
+  .num {
+    width: 66px; height: 66px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--text);
+    border: 3px solid var(--primary);
+    box-shadow: 0 0 18px rgba(187, 243, 81, 0.55), inset 0 0 12px rgba(187, 243, 81, 0.25);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--primary);
+  }
+  .step:last-child .num {
+    border-color: var(--secondary);
+    color: var(--secondary);
+    box-shadow: 0 0 18px rgba(0, 188, 255, 0.6), inset 0 0 12px rgba(0, 188, 255, 0.25);
+  }
+  .copy h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.05;
+  }
+  .copy p {
+    margin-top: 8px;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .visual {
+    height: 100%;
+    max-height: 196px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--card);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+  }
+  .mono { font-family: var(--font-mono); font-weight: 500; }
+  .tag {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+  .chip.lime { border-color: var(--primary); color: var(--primary); }
+  .chip.cyan { border-color: var(--secondary); color: var(--secondary); }
+
+  /* 1 — design system */
+  .swatches { display: flex; gap: 10px; }
+  .swatches span { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border); }
+  .statusbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--fg);
+  }
+  .dot { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 8px var(--primary); }
+
+  /* 2 — prompt */
+  .prompt {
+    padding: 12px 14px;
+    border: 1.5px solid var(--secondary);
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(0, 188, 255, 0.3);
+    font-family: var(--font-mono);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+  .prompt b { color: var(--secondary); }
+  .caret { display: inline-block; width: 9px; height: 17px; margin-left: 2px; vertical-align: -3px; background: var(--secondary); animation: blink 1s steps(1) infinite; }
+
+  /* 3 — review */
+  .review { display: grid; grid-template-columns: 132px 1fr; gap: 16px; align-items: center; }
+  .thumb {
+    position: relative;
+    height: 132px;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--text);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .thumb i { display: block; height: 7px; border-radius: 4px; background: rgba(255, 255, 255, 0.22); }
+  .thumb i:first-child { height: 16px; width: 70%; background: rgba(255, 255, 255, 0.5); outline: 1.5px dashed var(--primary); outline-offset: 3px; }
+  .thumb .pin {
+    position: absolute;
+    top: -10px; right: -12px;
+    width: 26px; height: 26px;
+    border-radius: 50% 50% 50% 4px;
+    background: var(--primary);
+    color: var(--text);
+    display: grid; place-items: center;
+    font-family: var(--font-mono); font-weight: 700; font-size: 13px;
+    box-shadow: 0 0 12px rgba(187, 243, 81, 0.7);
+  }
+  .comment {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.35);
+    font-size: 15px;
+    line-height: 1.35;
+    color: var(--fg);
+  }
+
+  /* 4 — targets */
+  .targets { display: grid; grid-template-columns: 84px 1fr; row-gap: 10px; align-items: center; }
+
+  @keyframes flow { to { background-position: 0 20px; } }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .steps::before, .caret { animation: none; }
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .cta { font-size: 22px; line-height: 1.4; color: var(--muted); }
+  .cta strong { display: block; font-family: var(--font-display); font-size: 30px; color: var(--fg); }
+  .cta .mono { font-size: 17px; color: var(--primary); }
+</style>
+</head>
+<body>
+<main class="poster">
+  <header>
+    <p class="eyebrow">Open Design Agent Kit · Workflow</p>
+    <h1>Four steps from<br>prompt to <em>published</em>.</h1>
+  </header>
+
+  <ol class="steps">
+    <li class="step">
+      <span class="num" aria-hidden="true">01</span>
+      <div class="copy">
+        <h2>Set up a design system</h2>
+        <p>Pick one of ~150 bundled systems, or import your own, and activate it in your agent.</p>
+      </div>
+      <div class="visual" aria-label="Neon design system shown as active">
+        <div class="swatches" aria-hidden="true">
+          <span style="background: var(--primary)"></span>
+          <span style="background: var(--secondary)"></span>
+          <span style="background: var(--text)"></span>
+          <span style="background: var(--surface)"></span>
+        </div>
+        <div class="statusbar"><span>◆ Design system: Neon</span><span><span class="dot"></span>active</span></div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="num" aria-hidden="true">02</span>
+      <div class="copy">
+        <h2>Prompt the agent</h2>
+        <p>Tell it the content and the type of design: poster, deck, landing page, dashboard.</p>
+      </div>
+      <div class="visual">
+        <p class="prompt"><b>&gt;</b> Make a 1080×1350 poster of our 4-step workflow<span class="caret" aria-hidden="true"></span></p>
+        <div class="chips">
+          <span class="chip cyan">type: poster</span>
+          <span class="chip">content: 4 steps</span>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="num" aria-hidden="true">03</span>
+      <div class="copy">
+        <h2>Review &amp; re-prompt</h2>
+        <p>Preview it live, pin comments on any element, and loop until it's right.</p>
+      </div>
+      <div class="visual">
+        <div class="review">
+          <div class="thumb" aria-hidden="true">
+            <i></i><i></i><i style="width: 80%"></i><i style="width: 60%"></i><i></i>
+            <span class="pin">1</span>
+          </div>
+          <div>
+            <p class="comment">“Make the headline bigger.”</p>
+            <div class="chips" style="margin-top: 10px">
+              <span class="chip lime">↺ re-prompt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <span class="num" aria-hidden="true">04</span>
+      <div class="copy">
+        <h2>Publish or export</h2>
+        <p>Send it to social media, to hosting, or to the design tools your team already uses.</p>
+      </div>
+      <div class="visual">
+        <div class="targets">
+          <span class="tag">Social</span>
+          <div class="chips"><span class="chip cyan">X</span><span class="chip cyan">Instagram</span><span class="chip cyan">LinkedIn</span></div>
+          <span class="tag">Hosting</span>
+          <div class="chips"><span class="chip">Static site</span><span class="chip">App code</span></div>
+          <span class="tag">Design</span>
+          <div class="chips"><span class="chip">Figma</span><span class="chip">Canva</span></div>
+        </div>
+      </div>
+    </li>
+  </ol>
+
+  <footer>
+    <p class="cta"><strong>Try it in your agent.</strong><span class="mono">github.com/feimacode/open-design-agent-kit</span></p>
+    <svg width="117" height="117" viewBox="-3 -3 39 39" shape-rendering="crispEdges" role="img" aria-label="QR code: https://github.com/feimacode/open-design-agent-kit">
+      <rect x="-3" y="-3" width="39" height="39" fill="#FFFFFF"/>
+      <path fill="#111827" d="M0 0h7v1H0zM8 0h1v1H8zM12 0h2v1H12zM16 0h5v1H16zM23 0h1v1H23zM26 0h7v1H26z
+M0 1h1v1H0zM6 1h1v1H6zM8 1h2v1H8zM11 1h3v1H11zM16 1h1v1H16zM18 1h1v1H18zM21 1h4v1H21zM26 1h1v1H26zM32 1h1v1H32z
+M0 2h1v1H0zM2 2h3v1H2zM6 2h1v1H6zM10 2h2v1H10zM15 2h1v1H15zM17 2h1v1H17zM19 2h2v1H19zM22 2h1v1H22zM24 2h1v1H24zM26 2h1v1H26zM28 2h3v1H28zM32 2h1v1H32z
+M0 3h1v1H0zM2 3h3v1H2zM6 3h1v1H6zM8 3h5v1H8zM14 3h1v1H14zM16 3h1v1H16zM20 3h1v1H20zM22 3h1v1H22zM24 3h1v1H24zM26 3h1v1H26zM28 3h3v1H28zM32 3h1v1H32z
+M0 4h1v1H0zM2 4h3v1H2zM6 4h1v1H6zM12 4h3v1H12zM20 4h1v1H20zM22 4h1v1H22zM24 4h1v1H24zM26 4h1v1H26zM28 4h3v1H28zM32 4h1v1H32z
+M0 5h1v1H0zM6 5h1v1H6zM10 5h1v1H10zM14 5h1v1H14zM19 5h4v1H19zM24 5h1v1H24zM26 5h1v1H26zM32 5h1v1H32z
+M0 6h7v1H0zM8 6h1v1H8zM10 6h1v1H10zM12 6h1v1H12zM14 6h1v1H14zM16 6h1v1H16zM18 6h1v1H18zM20 6h1v1H20zM22 6h1v1H22zM24 6h1v1H24zM26 6h7v1H26z
+M8 7h1v1H8zM17 7h2v1H17zM20 7h1v1H20zM23 7h2v1H23z
+M0 8h1v1H0zM2 8h2v1H2zM5 8h3v1H5zM9 8h1v1H9zM11 8h1v1H11zM14 8h1v1H14zM16 8h4v1H16zM21 8h2v1H21zM24 8h1v1H24zM26 8h1v1H26zM29 8h1v1H29zM31 8h2v1H31z
+M0 9h1v1H0zM3 9h1v1H3zM7 9h1v1H7zM9 9h2v1H9zM12 9h1v1H12zM14 9h1v1H14zM18 9h4v1H18zM23 9h1v1H23zM26 9h2v1H26zM29 9h2v1H29zM32 9h1v1H32z
+M0 10h1v1H0zM4 10h4v1H4zM14 10h1v1H14zM16 10h2v1H16zM20 10h1v1H20zM22 10h2v1H22zM25 10h5v1H25zM32 10h1v1H32z
+M2 11h4v1H2zM8 11h1v1H8zM10 11h2v1H10zM13 11h2v1H13zM18 11h1v1H18zM20 11h1v1H20zM22 11h1v1H22zM26 11h2v1H26zM29 11h1v1H29zM31 11h2v1H31z
+M0 12h3v1H0zM5 12h2v1H5zM8 12h5v1H8zM15 12h1v1H15zM18 12h1v1H18zM23 12h3v1H23zM27 12h3v1H27zM31 12h2v1H31z
+M0 13h3v1H0zM8 13h3v1H8zM16 13h1v1H16zM18 13h1v1H18zM21 13h1v1H21zM24 13h1v1H24zM27 13h1v1H27zM30 13h2v1H30z
+M3 14h2v1H3zM6 14h1v1H6zM10 14h1v1H10zM15 14h2v1H15zM18 14h1v1H18zM21 14h1v1H21zM24 14h1v1H24zM26 14h4v1H26z
+M0 15h2v1H0zM11 15h4v1H11zM16 15h1v1H16zM19 15h3v1H19zM23 15h1v1H23zM25 15h6v1H25z
+M0 16h2v1H0zM3 16h2v1H3zM6 16h1v1H6zM8 16h5v1H8zM15 16h1v1H15zM18 16h6v1H18zM25 16h2v1H25zM28 16h3v1H28z
+M2 17h2v1H2zM7 17h2v1H7zM11 17h2v1H11zM15 17h1v1H15zM17 17h1v1H17zM20 17h7v1H20zM28 17h2v1H28zM31 17h2v1H31z
+M2 18h2v1H2zM6 18h3v1H6zM14 18h2v1H14zM17 18h1v1H17zM20 18h3v1H20zM24 18h5v1H24zM30 18h2v1H30z
+M1 19h2v1H1zM4 19h2v1H4zM7 19h1v1H7zM10 19h1v1H10zM12 19h1v1H12zM16 19h1v1H16zM19 19h1v1H19zM22 19h3v1H22zM28 19h1v1H28zM31 19h2v1H31z
+M4 20h3v1H4zM8 20h1v1H8zM13 20h2v1H13zM18 20h1v1H18zM21 20h1v1H21zM25 20h1v1H25zM29 20h2v1H29z
+M0 21h5v1H0zM8 21h1v1H8zM11 21h1v1H11zM14 21h2v1H14zM18 21h1v1H18zM21 21h1v1H21zM23 21h1v1H23zM26 21h1v1H26zM29 21h2v1H29zM32 21h1v1H32z
+M2 22h2v1H2zM6 22h3v1H6zM10 22h2v1H10zM14 22h1v1H14zM16 22h2v1H16zM20 22h2v1H20zM23 22h7v1H23zM31 22h2v1H31z
+M1 23h1v1H1zM4 23h1v1H4zM7 23h1v1H7zM10 23h2v1H10zM13 23h2v1H13zM16 23h1v1H16zM18 23h3v1H18zM26 23h1v1H26zM28 23h2v1H28zM31 23h2v1H31z
+M0 24h1v1H0zM6 24h1v1H6zM8 24h1v1H8zM10 24h1v1H10zM12 24h1v1H12zM14 24h2v1H14zM17 24h1v1H17zM22 24h1v1H22zM24 24h5v1H24z
+M8 25h2v1H8zM11 25h1v1H11zM15 25h3v1H15zM19 25h3v1H19zM24 25h1v1H24zM28 25h2v1H28z
+M0 26h7v1H0zM8 26h4v1H8zM19 26h6v1H19zM26 26h1v1H26zM28 26h1v1H28z
+M0 27h1v1H0zM6 27h1v1H6zM8 27h3v1H8zM14 27h1v1H14zM16 27h1v1H16zM20 27h5v1H20zM28 27h3v1H28z
+M0 28h1v1H0zM2 28h3v1H2zM6 28h1v1H6zM9 28h1v1H9zM11 28h2v1H11zM14 28h2v1H14zM17 28h1v1H17zM19 28h1v1H19zM21 28h8v1H21zM30 28h1v1H30zM32 28h1v1H32z
+M0 29h1v1H0zM2 29h3v1H2zM6 29h1v1H6zM8 29h1v1H8zM10 29h1v1H10zM12 29h1v1H12zM18 29h1v1H18zM20 29h4v1H20zM27 29h1v1H27zM29 29h1v1H29zM32 29h1v1H32z
+M0 30h1v1H0zM2 30h3v1H2zM6 30h1v1H6zM8 30h1v1H8zM11 30h2v1H11zM17 30h2v1H17zM20 30h1v1H20zM22 30h1v1H22zM26 30h2v1H26zM29 30h2v1H29z
+M0 31h1v1H0zM6 31h1v1H6zM10 31h1v1H10zM15 31h4v1H15zM20 31h1v1H20zM22 31h4v1H22zM27 31h2v1H27zM32 31h1v1H32z
+M0 32h7v1H0zM8 32h2v1H8zM11 32h2v1H11zM15 32h4v1H15zM21 32h1v1H21zM23 32h1v1H23zM28 32h3v1H28z"/>
+    </svg>
+  </footer>
+</main>
+</body>
+</html>
