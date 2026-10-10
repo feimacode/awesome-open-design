@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Create a social media poster, vertical 1080\u00d71350 (4:5), demoing the main workflow: four steps from prompt to published. Dark technical aesthetic: near-black background with a faint 48px grid that fades out top and bottom via a linear mask, plus soft lime and cyan radial glows. Top: a mono lime eyebrow with a glowing dot, an ~84px serif headline \u2018Four steps from prompt to published.\u2019 with the last word italic in cyan. Middle: a vertical timeline of four equal step rows connected by an animated dashed lime rail \u2014 each row is a glowing circle numeral (the last one cyan, the rest lime), a serif step title with muted description, and a small micro-UI card on the right: (1) design system \u2014 four palette swatches and a status bar showing \u2018Design system: \u2026 \u00b7 active\u2019 with a glowing dot; (2) prompt \u2014 a cyan-glowing mono prompt box with a blinking caret plus small type/content chips; (3) review \u2014 a skeletal thumbnail with a numbered comment pin, a sample comment, and a re-prompt chip; (4) publish \u2014 rows of chips grouped as Social / Hosting / Design targets. Bottom: a CTA \u2014 serif line plus a mono URL \u2014 and a crisp inline-SVG QR code linking to the repo. Lime #BBF351 and cyan #00BCFF only; Roboto + STIX Two Text + Source Code Pro; disable all animation under prefers-reduced-motion."
+      }
+    }
+  }
+}
