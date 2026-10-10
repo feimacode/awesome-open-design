@@ -26,11 +26,15 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <sub><a href="examples/achievement-certificate-editorial">Achievement Certificate — Editorial</a></sub>
 </td>
 <td align="center" width="33%">
-<a href="examples/birthday-invitation-bold"><img src="examples/birthday-invitation-bold/thumbnail.png" width="280" alt="Birthday Invitation — Bold"></a><br />
-<sub><a href="examples/birthday-invitation-bold">Birthday Invitation — Bold</a></sub>
+<a href="examples/agent-kit-workflow-poster"><img src="examples/agent-kit-workflow-poster/thumbnail.png" width="280" alt="Four Steps from Prompt to Published — Workflow Poster"></a><br />
+<sub><a href="examples/agent-kit-workflow-poster">Four Steps from Prompt to Published — Workflow Poster</a></sub>
 </td>
 </tr>
 <tr>
+<td align="center" width="33%">
+<a href="examples/birthday-invitation-bold"><img src="examples/birthday-invitation-bold/thumbnail.png" width="280" alt="Birthday Invitation — Bold"></a><br />
+<sub><a href="examples/birthday-invitation-bold">Birthday Invitation — Bold</a></sub>
+</td>
 <td align="center" width="33%">
 <a href="examples/bold-birthday-invitation"><img src="examples/bold-birthday-invitation/thumbnail.png" width="280" alt="Bold Birthday Party Invitation"></a><br />
 <sub><a href="examples/bold-birthday-invitation">Bold Birthday Party Invitation</a></sub>
@@ -39,12 +43,12 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <a href="examples/claude-macos-notification-banner"><img src="examples/claude-macos-notification-banner/thumbnail.png" width="280" alt="Claude macOS Notification Banner"></a><br />
 <sub><a href="examples/claude-macos-notification-banner">Claude macOS Notification Banner</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/coding-agent-connectors-poster"><img src="examples/coding-agent-connectors-poster/thumbnail.png" width="280" alt="One Agent, Every Canvas — Connectors Poster"></a><br />
 <sub><a href="examples/coding-agent-connectors-poster">One Agent, Every Canvas — Connectors Poster</a></sub>
 </td>
-</tr>
-<tr>
 <td align="center" width="33%">
 <a href="examples/course-completion-certificate-minimal"><img src="examples/course-completion-certificate-minimal/thumbnail.png" width="280" alt="Course-Completion Certificate — Minimal"></a><br />
 <sub><a href="examples/course-completion-certificate-minimal">Course-Completion Certificate — Minimal</a></sub>
@@ -53,12 +57,12 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <a href="examples/editorial-forest-report-deck"><img src="examples/editorial-forest-report-deck/thumbnail.png" width="280" alt="Editorial Forest — Quarterly Report Deck"></a><br />
 <sub><a href="examples/editorial-forest-report-deck">Editorial Forest — Quarterly Report Deck</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/editorial-serif-resume"><img src="examples/editorial-serif-resume/thumbnail.png" width="280" alt="Editorial Serif Resume"></a><br />
 <sub><a href="examples/editorial-serif-resume">Editorial Serif Resume</a></sub>
 </td>
-</tr>
-<tr>
 <td align="center" width="33%">
 <a href="examples/field-notes-deck"><img src="examples/field-notes-deck/thumbnail.png" width="280" alt="Field Notes — Deck Opener"></a><br />
 <sub><a href="examples/field-notes-deck">Field Notes — Deck Opener</a></sub>
@@ -67,12 +71,12 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <a href="examples/fracture-bloom-poster"><img src="examples/fracture-bloom-poster/thumbnail.png" width="280" alt="Fracture &amp; Bloom — Exhibition Poster"></a><br />
 <sub><a href="examples/fracture-bloom-poster">Fracture &amp; Bloom — Exhibition Poster</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/grid-collage-announcement"><img src="examples/grid-collage-announcement/thumbnail.png" width="280" alt="Grid Collage Announcement Post"></a><br />
 <sub><a href="examples/grid-collage-announcement">Grid Collage Announcement Post</a></sub>
 </td>
-</tr>
-<tr>
 <td align="center" width="33%">
 <a href="examples/liquid-bg-hero"><img src="examples/liquid-bg-hero/thumbnail.png" width="280" alt="Liquid Background Hero"></a><br />
 <sub><a href="examples/liquid-bg-hero">Liquid Background Hero</a></sub>
@@ -81,12 +85,12 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <a href="examples/metrics-deck-dark"><img src="examples/metrics-deck-dark/thumbnail.png" width="280" alt="Dark Metrics — Single Stat Slide"></a><br />
 <sub><a href="examples/metrics-deck-dark">Dark Metrics — Single Stat Slide</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/minimal-certificate"><img src="examples/minimal-certificate/thumbnail.png" width="280" alt="Minimal Course Completion Certificate"></a><br />
 <sub><a href="examples/minimal-certificate">Minimal Course Completion Certificate</a></sub>
 </td>
-</tr>
-<tr>
 <td align="center" width="33%">
 <a href="examples/modern-wedding-invitation"><img src="examples/modern-wedding-invitation/thumbnail.png" width="280" alt="Modern Wedding Invitation"></a><br />
 <sub><a href="examples/modern-wedding-invitation">Modern Wedding Invitation</a></sub>
@@ -95,12 +99,12 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <a href="examples/monogram-rule-card"><img src="examples/monogram-rule-card/thumbnail.png" width="280" alt="Monogram + Rule Business Card"></a><br />
 <sub><a href="examples/monogram-rule-card">Monogram + Rule Business Card</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/nightlife-gig-flyer"><img src="examples/nightlife-gig-flyer/thumbnail.png" width="280" alt="Nightlife / Gig Flyer"></a><br />
 <sub><a href="examples/nightlife-gig-flyer">Nightlife / Gig Flyer</a></sub>
 </td>
-</tr>
-<tr>
 <td align="center" width="33%">
 <a href="examples/now-page"><img src="examples/now-page/thumbnail.png" width="280" alt="Now Page"></a><br />
 <sub><a href="examples/now-page">Now Page</a></sub>
@@ -109,12 +113,12 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <a href="examples/open-design-agent-kit-launch"><img src="examples/open-design-agent-kit-launch/thumbnail.png" width="280" alt="Open Design Agent Kit — Launch Card"></a><br />
 <sub><a href="examples/open-design-agent-kit-launch">Open Design Agent Kit — Launch Card</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/quote-carousel-card"><img src="examples/quote-carousel-card/thumbnail.png" width="280" alt="Quote Carousel Card"></a><br />
 <sub><a href="examples/quote-carousel-card">Quote Carousel Card</a></sub>
 </td>
-</tr>
-<tr>
 <td align="center" width="33%">
 <a href="examples/two-column-mono-resume"><img src="examples/two-column-mono-resume/thumbnail.png" width="280" alt="Two-Column Monochrome Resume"></a><br />
 <sub><a href="examples/two-column-mono-resume">Two-Column Monochrome Resume</a></sub>
@@ -123,18 +127,20 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <a href="examples/warm-birthday-card"><img src="examples/warm-birthday-card/thumbnail.png" width="280" alt="Warm Birthday Card"></a><br />
 <sub><a href="examples/warm-birthday-card">Warm Birthday Card</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/warm-minimal-card"><img src="examples/warm-minimal-card/thumbnail.png" width="280" alt="Warm Minimal Business Card"></a><br />
 <sub><a href="examples/warm-minimal-card">Warm Minimal Business Card</a></sub>
 </td>
-</tr>
-<tr>
+<td align="center" width="33%">
+<a href="examples/west-lake-travel-cards"><img src="examples/west-lake-travel-cards/thumbnail.png" width="280" alt="West Lake Travel Guide — Xiaohongshu Cards"></a><br />
+<sub><a href="examples/west-lake-travel-cards">West Lake Travel Guide — Xiaohongshu Cards</a></sub>
+</td>
 <td align="center" width="33%">
 <a href="examples/workshop-meetup-flyer"><img src="examples/workshop-meetup-flyer/thumbnail.png" width="280" alt="Workshop / Meetup Flyer"></a><br />
 <sub><a href="examples/workshop-meetup-flyer">Workshop / Meetup Flyer</a></sub>
 </td>
-<td></td>
-<td></td>
 </tr>
 </table>
 <!-- THUMBNAILS:END -->
