@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Art direct a quarterly design-department report for an AI company like a magazine creative director. Make an 8-slide editorial deck in one self-contained HTML file on a fixed 1920\u00d71080 stage: (1) a deep-green cover with an oversized serif headline, a circular mono monogram mark top-right, and an uppercase mono footline; (2) an agenda as an asymmetric tile grid of solid color blocks \u2014 one tall tile plus four smaller ones \u2014 with mono numbers and serif topic titles; (3) a full-bleed pull-quote statement slide with a serif blockquote and mono attribution row; (4) a two-column spread: a green panel holding a stroke-only inline-SVG line figure with a mono caption, against a headline, body paragraphs and a three-cell plan / actual / variance meta list under a hairline rule; (5) a plan-vs-actual grouped bar chart built in pure HTML/CSS with mono axis labels, value labels on each bar, a two-swatch legend and reconciling footnote; (6) a four-step framework band with PLAN / ACTUAL / GAP / NEXT cards; (7) three oversized KPI callouts with mono tag labels; (8) a green closing slide with three priorities/watch/decisions columns. Palette: forest green, dusty pink, cream paper, warm ink. Type: Source Serif 4 + JetBrains Mono only, no third typeface, no photography. All metrics are illustrative \u2014 label every one as sample data rather than presenting invented figures as real."
+      }
+    }
+  }
+}
