@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>杭州西湖旅行攻略 · 小红书图文卡片</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg: #FBF2EA;
+    --surface: #FFFFFF;
+    --ink: #3A2A24;
+    --muted: #8C7A6B;
+    --rose: #E3A79A;
+    --rose-deep: #C97B63;
+    --sage: #9FAF8E;
+    --sage-deep: #748A64;
+    --border: rgba(58,42,36,0.10);
+    --shadow: 0 18px 40px rgba(58,42,36,0.10);
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html,body{
+    background:#EFE4DA;
+    font-family: "PingFang SC","Microsoft YaHei","Hiragino Sans GB",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color: var(--ink);
+  }
+  .stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:48px;
+    padding:48px 0 96px;
+  }
+  .card{
+    width:1080px;
+    height:1440px;
+    position:relative;
+    background: var(--bg);
+    border-radius:40px;
+    overflow:hidden;
+    box-shadow: var(--shadow);
+    display:flex;
+    flex-direction:column;
+    padding:88px 80px 72px;
+  }
+  /* decorative blobs shared across cards */
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter: blur(0px);
+    opacity:0.5;
+    z-index:0;
+  }
+  .badge-num{
+    position:absolute;
+    top:56px;
+    left:56px;
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:2px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.6);
+    border:1px solid var(--border);
+    padding:10px 24px;
+    border-radius:999px;
+    z-index:2;
+  }
+  .watermark{
+    position:absolute;
+    right:56px;
+    bottom:48px;
+    font-size:24px;
+    color: var(--muted);
+    opacity:0.65;
+    letter-spacing:1px;
+    z-index:2;
+  }
+  .tag-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background: var(--rose);
+    color:#fff;
+    font-size:30px;
+    font-weight:700;
+    padding:16px 36px;
+    border-radius:999px;
+    box-shadow: 0 10px 24px rgba(201,123,99,0.35);
+  }
+  .content{ position:relative; z-index:1; display:flex; flex-direction:column; height:100%; }
+
+  /* ---------- Cover card ---------- */
+  .cover .content{ justify-content:center; align-items:center; text-align:center; gap:40px; }
+  .cover .eyebrow{ font-size:34px; font-weight:600; color: var(--rose-deep); letter-spacing:6px; }
+  .cover .title-cn{ font-size:118px; font-weight:800; line-height:1.25; color: var(--ink); }
+  .cover .title-en{ font-size:40px; font-weight:500; color: var(--muted); letter-spacing:1px; }
+  .cover .divider{ width:120px; height:6px; background: var(--rose); border-radius:999px; margin:8px 0; }
+
+  /* ---------- Highlights card ---------- */
+  .highlights .content{ justify-content:center; gap:56px; }
+  .h-title{ font-size:72px; font-weight:800; margin-bottom:16px; }
+  .h-item{
+    display:flex;
+    align-items:flex-start;
+    gap:32px;
+    background: var(--surface);
+    border-radius:32px;
+    padding:44px 40px;
+    box-shadow: var(--shadow);
+  }
+  .h-icon{
+    width:96px; height:96px; flex:none;
+    border-radius:24px;
+    background: #F3E6DE;
+    display:flex; align-items:center; justify-content:center;
+    font-size:52px;
+  }
+  .h-text .h-line1{ font-size:44px; font-weight:800; line-height:1.3; }
+  .h-text .h-line2{ font-size:30px; color: var(--muted); margin-top:10px; line-height:1.5; }
+
+  /* ---------- Spot cards ---------- */
+  .spot .content{ gap:36px; }
+  .spot .overline{ font-size:32px; font-weight:700; color: var(--rose-deep); letter-spacing:2px; }
+  .spot .title-row{ display:flex; align-items:baseline; gap:24px; flex-wrap:wrap; }
+  .spot .title-cn{ font-size:84px; font-weight:800; line-height:1.15; }
+  .spot .title-en{ font-size:32px; color: var(--muted); font-weight:500; }
+  .loc-row{
+    display:flex; align-items:center; gap:16px;
+    background: var(--surface);
+    border-radius:20px;
+    padding:24px 28px;
+    box-shadow: var(--shadow);
+  }
+  .loc-row .pin{ font-size:34px; }
+  .loc-row .loc-text{ font-size:32px; color: var(--ink); font-weight:600; }
+  .desc{ font-size:38px; line-height:1.7; color: var(--ink); background: var(--surface); border-radius:28px; padding:40px 44px; box-shadow: var(--shadow); }
+  .stat-row{ display:flex; gap:28px; }
+  .stat-chip{
+    flex:1;
+    background: linear-gradient(135deg, var(--sage), var(--sage-deep));
+    color:#fff;
+    border-radius:28px;
+    padding:32px 28px;
+    text-align:center;
+    box-shadow: 0 14px 28px rgba(116,138,100,0.3);
+  }
+  .stat-chip .stat-num{ font-size:52px; font-weight:800; display:block; }
+  .stat-chip .stat-label{ font-size:26px; font-weight:600; opacity:0.95; margin-top:6px; display:block; }
+  .spot .fill{ flex:1; }
+  .bottom-tag{ align-self:flex-start; }
+
+  /* ---------- Summary / CTA card ---------- */
+  .summary .content{ gap:48px; }
+  .summary .s-title{ font-size:68px; font-weight:800; line-height:1.3; }
+  .flow{
+    display:flex; align-items:center; flex-wrap:wrap; gap:18px;
+    background: var(--surface); border-radius:28px; padding:36px 32px; box-shadow: var(--shadow);
+  }
+  .flow .stop{ font-size:34px; font-weight:700; background:#F3E6DE; color:var(--rose-deep); padding:16px 26px; border-radius:999px; }
+  .flow .arrow{ font-size:34px; color: var(--muted); }
+  .cta-box{
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    border-radius:32px;
+    padding:48px 44px;
+    color:#fff;
+    box-shadow: 0 18px 36px rgba(201,123,99,0.35);
+  }
+  .cta-box .cta-title{ font-size:48px; font-weight:800; line-height:1.4; }
+  .cta-box .cta-sub{ font-size:30px; margin-top:14px; opacity:0.95; line-height:1.5; }
+  .actions{ display:flex; gap:24px; margin-top:20px; }
+  .actions .act{
+    flex:1; text-align:center; background: rgba(255,255,255,0.18);
+    border-radius:20px; padding:22px 10px; font-size:30px; font-weight:700;
+  }
+  .summary .fill{ flex:1; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- Card 1 — Cover -->
+  <section class="card cover" data-od-card>
+    <div class="blob" style="width:560px;height:560px;background:var(--rose);top:-180px;right:-160px;"></div>
+    <div class="blob" style="width:420px;height:420px;background:var(--sage);bottom:-140px;left:-140px;"></div>
+    <div class="watermark">@西湖攻略局 · 2026</div>
+    <div class="content">
+      <div class="tag-pill">📌 建议收藏</div>
+      <div class="divider"></div>
+      <div class="title-cn">杭州西湖<br>旅行攻略</div>
+      <div class="title-en">Hangzhou West Lake Travel Tips</div>
+      <div class="eyebrow">四大必打卡 · 两天搞定</div>
+    </div>
+  </section>
+
+  <!-- Card 2 — Highlights -->
+  <section class="card highlights" data-od-card>
+    <div class="badge-num">02 / 07</div>
+    <div class="watermark">@西湖攻略局 · 2026</div>
+    <div class="content">
+      <div class="h-title">两大亮点 ✨</div>
+      <div class="h-item">
+        <div class="h-icon">🆓</div>
+        <div class="h-text">
+          <div class="h-line1">2天全免费</div>
+          <div class="h-line2">西湖景区全年不收门票，环湖步道、苏堤、断桥均可自由进出</div>
+        </div>
+      </div>
+      <div class="h-item">
+        <div class="h-icon">🌅</div>
+        <div class="h-text">
+          <div class="h-line1">日出日落最佳时段</div>
+          <div class="h-line2">清晨人少光线柔和，傍晚雷峰塔看落日，是出片两大黄金时间</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card 3 — Three Pools Mirroring the Moon -->
+  <section class="card spot" data-od-card>
+    <div class="badge-num">03 / 07</div>
+    <div class="watermark">@西湖攻略局 · 2026</div>
+    <div class="content">
+      <div class="overline">01 · 必游景点</div>
+      <div class="title-row">
+        <div class="title-cn">三潭印月</div>
+        <div class="title-en">Three Pools Mirroring the Moon</div>
+      </div>
+      <div class="loc-row"><span class="pin">📍</span><span class="loc-text">西湖小瀛洲岛</span></div>
+      <div class="desc">1元人民币背面同款石塔就在这里！三座石塔立于湖面，仅能乘船抵达，是西湖最具代表性的打卡点。</div>
+      <div class="fill"></div>
+      <div class="stat-row bottom-tag">
+        <div class="stat-chip"><span class="stat-num">¥1</span><span class="stat-label">纸币同款地标</span></div>
+        <div class="stat-chip"><span class="stat-num">🚤</span><span class="stat-label">仅限乘船抵达</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card 4 — Su Causeway -->
+  <section class="card spot" data-od-card>
+    <div class="badge-num">04 / 07</div>
+    <div class="watermark">@西湖攻略局 · 2026</div>
+    <div class="content">
+      <div class="overline">02 · 必游景点</div>
+      <div class="title-row">
+        <div class="title-cn">苏堤</div>
+        <div class="title-en">Su Causeway</div>
+      </div>
+      <div class="loc-row"><span class="pin">📍</span><span class="loc-text">横贯西湖西侧</span></div>
+      <div class="desc">全长2.8公里的景观长堤，六座石桥串联南北，春天桃花夹岸盛开，是环湖最惬意的徒步路线。</div>
+      <div class="fill"></div>
+      <div class="stat-row bottom-tag">
+        <div class="stat-chip"><span class="stat-num">2.8km</span><span class="stat-label">堤岸全长</span></div>
+        <div class="stat-chip"><span class="stat-num">40-50min</span><span class="stat-label">步行用时</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card 5 — Leifeng Pagoda -->
+  <section class="card spot" data-od-card>
+    <div class="badge-num">05 / 07</div>
+    <div class="watermark">@西湖攻略局 · 2026</div>
+    <div class="content">
+      <div class="overline">03 · 必游景点</div>
+      <div class="title-row">
+        <div class="title-cn">雷峰塔</div>
+        <div class="title-en">Leifeng Pagoda</div>
+      </div>
+      <div class="loc-row"><span class="pin">📍</span><span class="loc-text">西湖区南山路15号</span></div>
+      <div class="desc">《白蛇传》传说的发生地，登塔可俯瞰西湖全景，是公认的湖上日落最佳观赏点。</div>
+      <div class="fill"></div>
+      <div class="stat-row bottom-tag">
+        <div class="stat-chip"><span class="stat-num">8:00-20:00</span><span class="stat-label">开放时间</span></div>
+        <div class="stat-chip"><span class="stat-num">🐍</span><span class="stat-label">白蛇传同款</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card 6 — Broken Bridge -->
+  <section class="card spot" data-od-card>
+    <div class="badge-num">06 / 07</div>
+    <div class="watermark">@西湖攻略局 · 2026</div>
+    <div class="content">
+      <div class="overline">04 · 必游景点</div>
+      <div class="title-row">
+        <div class="title-cn">断桥</div>
+        <div class="title-en">Broken Bridge</div>
+      </div>
+      <div class="loc-row"><span class="pin">📍</span><span class="loc-text">西湖区白堤</span></div>
+      <div class="desc">环湖步道最出圈的入口，也是经典的拍照打卡地标，许多攻略都从这里开始第一张照片。</div>
+      <div class="fill"></div>
+      <div class="stat-row bottom-tag">
+        <div class="stat-chip"><span class="stat-num">📸</span><span class="stat-label">经典打卡地标</span></div>
+        <div class="stat-chip"><span class="stat-num">🚶</span><span class="stat-label">环湖步道起点</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card 7 — Summary + CTA -->
+  <section class="card summary" data-od-card>
+    <div class="badge-num">07 / 07</div>
+    <div class="watermark">@西湖攻略局 · 2026</div>
+    <div class="content">
+      <div class="s-title">西湖两日游路线图 🗺️</div>
+      <div class="flow">
+        <span class="stop">断桥</span><span class="arrow">→</span>
+        <span class="stop">苏堤</span><span class="arrow">→</span>
+        <span class="stop">三潭印月</span><span class="arrow">→</span>
+        <span class="stop">雷峰塔看日落</span>
+      </div>
+      <div class="fill"></div>
+      <div class="cta-box">
+        <div class="cta-title">点赞收藏，下次来杭州直接抄作业！</div>
+        <div class="cta-sub">关注我，持续更新小众宝藏路线 ✈️</div>
+        <div class="actions">
+          <div class="act">❤️ 关注</div>
+          <div class="act">⭐ 收藏</div>
+          <div class="act">💬 评论</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
