@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Create a social media poster, vertical 1080\u00d71350 (4:5). The content is the Open Design Agent Kit \u2014 \u2018One agent. Every canvas.\u2019 Dark technical aesthetic: near-black background with a faint 48px grid that fades out via a radial mask, plus soft lime and cyan radial glows. Top: a mono lime eyebrow \u2018Open Design Agent Kit\u2019 with a glowing dot, a ~92px serif headline \u2018One agent. Every canvas.\u2019 with \u2018canvas\u2019 italic in cyan, and a muted subhead: your coding agent designs it, then ships it to Figma, Canva and every social feed \u2014 through connectors, not copy-paste. Center: an animated SVG orbit diagram \u2014 a glowing \u2018Coding Agent + OPEN DESIGN AGENT KIT\u2019 core node at the center, an inner dashed orbit with Figma and Canva nodes in lime, an outer dashed orbit with X, Instagram, LinkedIn, YouTube and Xiaohongshu nodes in cyan, and dashed connector lines flowing from the core to every node with a soft glow underlay (disable all animation under prefers-reduced-motion). Footer: three value points with mono cyan labels \u2014 01 \u00b7 PULL: turn Figma frames into working pages; 02 \u00b7 PUSH: send finished artifacts to Canva; 03 \u00b7 POST: export sized for every social feed \u2014 and, on the right, the \u2018open-design agent kit\u2019 lockup plus a crisp inline-SVG QR code linking to the repo. Lime #BBF351 and cyan #00BCFF only; Roboto + STIX Two Text + Source Code Pro; stroke-only inline-SVG glyphs, no photos, no emoji."
+      }
+    }
+  }
+}
