@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>StockPulse — Mobile Trading App</title>
+<style>
+  /* ── Reset & Base ─────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Colorful Design System — Dark Fintech Adaptation */
+    --bg-primary: #1E1B2E;
+    --bg-secondary: #2A2640;
+    --bg-card: #332F4A;
+    --bg-card-elevated: #3D3858;
+    --bg-input: #2A2640;
+    --accent-cyan: #00D4FF;
+    --accent-pink: #FF5C8A;
+    --accent-yellow: #FFD93D;
+    --text-primary: #FFFFFF;
+    --text-secondary: #B8B3D0;
+    --text-muted: #8B85AA;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-accent: rgba(0, 212, 255, 0.3);
+    --gain-green: #00E88F;
+    --loss-red: #FF5C5C;
+    --gain-green-bg: rgba(0, 232, 143, 0.12);
+    --loss-red-bg: rgba(255, 92, 92, 0.12);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    --font-serif: 'Iowan Old Style', 'Charter', Georgia, serif;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
+    --spacing-3xl: 48px;
+    --nav-height: 64px;
+    --status-bar: 44px;
+    --safe-bottom: 34px;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ── Phone Frame ──────────────────────────────── */
+  .phone-frame {
+    width: 390px;
+    height: 844px;
+    background: var(--bg-primary);
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 0 3px #3D3858, 0 0 0 6px #1E1B2E, 0 20px 80px rgba(0,0,0,0.6);
+  }
+
+  /* ── Status Bar ───────────────────────────────── */
+  .status-bar {
+    height: var(--status-bar);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-xl);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .status-bar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .status-bar-right svg { width: 16px; height: 16px; }
+
+  /* ── Dynamic Island ───────────────────────────── */
+  .dynamic-island {
+    width: 126px;
+    height: 36px;
+    background: #000;
+    border-radius: 20px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+  }
+
+  /* ── Screens Container ────────────────────────── */
+  .screens-container {
+    height: calc(100% - var(--status-bar) - var(--nav-height) - var(--safe-bottom));
+    overflow: visible;
+    position: relative;
+  }
+
+  .screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+    pointer-events: none;
+    padding-bottom: var(--spacing-xl);
+    scrollbar-width: none;
+  }
+
+  .screen::-webkit-scrollbar { display: none; }
+  .screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: all;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
+  }
+
+  .screen-padding {
+    padding: 0 var(--spacing-xl);
+  }
+
+  /* ── Bottom Navigation ────────────────────────── */
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--nav-height) + var(--safe-bottom));
+    background: rgba(30, 27, 46, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--safe-bottom);
+    z-index: 50;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-md);
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+  }
+
+  .nav-item.active {
+    color: var(--accent-cyan);
+  }
+
+  .nav-item.active svg {
+    stroke: var(--accent-cyan);
+    filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4));
+  }
+
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    background: var(--accent-cyan);
+    border-radius: 0 0 3px 3px;
+  }
+
+  /* ── Typography ───────────────────────────────── */
+  .heading-xl {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+
+  .heading-lg {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+  }
+
+  .heading-md {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .body-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .caption {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .mono-lg {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .mono-md {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+
+  .mono-sm {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+  }
+
+  .mono-caption {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ── Chips & Badges ───────────────────────────── */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+  }
+
+  .chip--gain { background: var(--gain-green-bg); color: var(--gain-green); }
+  .chip--loss { background: var(--loss-red-bg); color: var(--loss-red); }
+  .chip--accent { background: rgba(0, 212, 255, 0.12); color: var(--accent-cyan); }
+  .chip--pink { background: rgba(255, 92, 170, 0.12); color: var(--accent-pink); }
+
+  /* ── Cards ────────────────────────────────────── */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-sm) 0;
+    box-shadow: var(--shadow-card);
+    overflow: visible;
+  }
+
+  .card--elevated {
+    background: var(--bg-card-elevated);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* ── Buttons ──────────────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 14px 24px;
+    min-height: 48px;
+  }
+
+  .btn--primary {
+    background: var(--accent-cyan);
+    color: #1E1B2E;
+  }
+
+  .btn--primary:hover { filter: brightness(1.1); }
+
+  .btn--gain {
+    background: var(--gain-green);
+    color: #1E1B2E;
+  }
+
+  .btn--loss {
+    background: var(--loss-red);
+    color: #fff;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .btn--full {
+    width: 100%;
+  }
+
+  .btn--sm {
+    padding: 8px 16px;
+    font-size: 13px;
+    min-height: 36px;
+    border-radius: var(--radius-sm);
+  }
+
+  .btn--round {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: var(--radius-full);
+  }
+
+  /* ── Screen 1: Portfolio / Home ───────────────── */
+  .greeting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding-top: var(--spacing-sm);
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+  }
+
+  .portfolio-value {
+    text-align: center;
+    padding: var(--spacing-md) 0;
+  }
+
+  .portfolio-value .label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .portfolio-change {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    padding: 4px 12px;
+    background: var(--gain-green-bg);
+    border-radius: var(--radius-full);
+  }
+
+  .portfolio-change span {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gain-green);
+  }
+
+  .portfolio-change .pct {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  /* Sparkline Chart */
+  .sparkline-container {
+    height: 72px;
+    margin: var(--spacing-xs) 0;
+    position: relative;
+  }
+
+  .sparkline-container svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Quick Actions */
+  .quick-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+  }
+
+  .quick-action {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg) var(--spacing-sm);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .quick-action:hover { border-color: var(--accent-cyan); }
+
+  .quick-action .icon-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quick-action .icon-circle svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+  }
+
+  .quick-action span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  /* Holdings List */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-header a {
+    font-size: 13px;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .holding-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 10px var(--spacing-md);
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: background 0.15s ease;
+    overflow: hidden;
+  }
+
+  .holding-item:last-child { border-bottom: none; }
+  .holding-item:hover { background: rgba(255, 255, 255, 0.02); }
+
+  .holding-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .holding-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .holding-info .name {
+    font-weight: 600;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .holding-info .ticker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .holding-value {
+    text-align: right;
+    flex-shrink: 0;
+    min-width: fit-content;
+    max-width: 40%;
+    overflow: hidden;
+  }
+
+  .holding-value .price {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .holding-value .change {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ── Screen 2: Stock Detail ───────────────────── */
+  .stock-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .stock-header .back-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+  }
+
+  .stock-header .back-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .stock-title-row {
+    flex: 1;
+  }
+
+  .stock-title-row h1 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .stock-title-row .ticker-badge {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .stock-price-block {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .stock-price-block .current-price {
+    font-family: var(--font-mono);
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+  }
+
+  .stock-price-block .price-change {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+  }
+
+  .stock-price-block .price-change span {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* Chart Time Period Selector */
+  .time-pills {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .time-pill {
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: transparent;
+    color: var(--text-muted);
+  }
+
+  .time-pill.active {
+    background: var(--accent-cyan);
+    color: #1E1B2E;
+  }
+
+  .time-pill:hover:not(.active) {
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Chart Area */
+  .chart-area {
+    height: 180px;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    background: linear-gradient(180deg, rgba(0, 232, 143, 0.06) 0%, transparent 100%);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .chart-area svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .stat-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+  }
+
+  .stat-item .stat-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .stat-item .stat-value {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* Trade Actions */
+  .trade-actions {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .trade-actions .btn { flex: 1; }
+
+  /* ── Screen 3: Explore / Search ───────────────── */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 12px var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    transition: border-color 0.2s ease;
+  }
+
+  .search-bar:focus-within {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+  }
+
+  .search-bar svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-muted);
+    fill: none;
+    stroke-width: 2;
+    flex-shrink: 0;
+  }
+
+  .search-bar input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--text-primary);
+  }
+
+  .search-bar input::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* Category Chips */
+  .category-row {
+    display: flex;
+    gap: var(--spacing-sm);
+    overflow-x: auto;
+    padding-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    scrollbar-width: none;
+  }
+
+  .category-row::-webkit-scrollbar { display: none; }
+
+  .category-chip {
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    border: 1px solid var(--border-subtle);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .category-chip.active {
+    background: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    color: #1E1B2E;
+  }
+
+  /* Trending Section */
+  .trending-card {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(255, 92, 170, 0.08) 100%);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .trending-card .trending-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .trending-card .trending-header svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--accent-yellow);
+    fill: var(--accent-yellow);
+  }
+
+  .trending-stocks {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .trending-stock {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .trending-stock:hover { transform: translateY(-2px); }
+
+  .trending-stock .mini-chart {
+    height: 40px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .trending-stock .mini-chart svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .trending-stock .ts-ticker {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .trending-stock .ts-change {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* Market Movers */
+  .mover-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+  }
+
+  .mover-item:last-child { border-bottom: none; }
+
+  .mover-rank {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .mover-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .mover-sparkline {
+    width: 60px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+
+  .mover-sparkline svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mover-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .mover-info .mover-name {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mover-info .mover-ticker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .mover-price {
+    text-align: right;
+    flex-shrink: 0;
+    min-width: fit-content;
+    overflow: hidden;
+  }
+
+  .mover-price .mp {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .mover-price .mc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* ── Screen 4: Trade / Buy-Sell ───────────────── */
+  .trade-type-toggle {
+    display: flex;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 3px;
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .trade-type-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: transparent;
+    color: var(--text-muted);
+  }
+
+  .trade-type-btn.active-buy {
+    background: var(--gain-green);
+    color: #1E1B2E;
+    box-shadow: 0 4px 16px rgba(0, 232, 143, 0.3);
+  }
+
+  .trade-type-btn.active-sell {
+    background: var(--loss-red);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(255, 92, 92, 0.3);
+  }
+
+  /* Order Type Selector */
+  .order-type-row {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .order-type-chip {
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--border-subtle);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .order-type-chip.active {
+    background: rgba(0, 212, 255, 0.12);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+  }
+
+  /* Stock Selector */
+  .stock-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .stock-selector:hover { border-color: var(--accent-cyan); }
+
+  .stock-selector .ss-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+  }
+
+  .stock-selector .ss-info { flex: 1; }
+
+  .stock-selector .ss-name {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .stock-selector .ss-ticker {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .stock-selector .ss-price {
+    text-align: right;
+  }
+
+  .stock-selector .ss-price .price-val {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .stock-selector .ss-arrow svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--text-muted);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  /* Quantity Input */
+  .input-group {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .input-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-sm);
+    display: block;
+  }
+
+  .input-field {
+    display: flex;
+    align-items: center;
+    background: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+  }
+
+  .input-field:focus-within {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+  }
+
+  .input-field .step-btn {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+
+  .input-field .step-btn:hover { color: var(--accent-cyan); }
+
+  .input-field input {
+    flex: 1;
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: var(--font-mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 0;
+  }
+
+  .input-hint {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: var(--spacing-sm);
+  }
+
+  /* Order Summary */
+  .order-summary {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .order-summary .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  .order-summary .summary-row + .summary-row {
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .order-summary .summary-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .order-summary .summary-value {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .order-summary .summary-total .summary-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 15px;
+  }
+
+  .order-summary .summary-total .summary-value {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  /* Slide to Buy Button */
+  .slide-btn-container {
+    position: relative;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .slide-btn {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  .slide-btn--buy {
+    background: linear-gradient(135deg, #00E88F 0%, #00C878 100%);
+    color: #1E1B2E;
+    box-shadow: 0 8px 32px rgba(0, 232, 143, 0.3);
+  }
+
+  .slide-btn--sell {
+    background: linear-gradient(135deg, #FF5C5C 0%, #E84040 100%);
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(255, 92, 92, 0.3);
+  }
+
+  .slide-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Swipe Hint */
+  .swipe-hint {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .swipe-hint svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--text-muted);
+    fill: none;
+    stroke-width: 2;
+    animation: swipeRight 2s ease-in-out infinite;
+  }
+
+  @keyframes swipeRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+  }
+
+  /* ── Notification badge ───────────────────────── */
+  .notif-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-pink);
+    border-radius: 50%;
+    border: 2px solid var(--bg-primary);
+  }
+
+  /* ── Profit/Loss color helpers ────────────────── */
+  .text-gain { color: var(--gain-green); }
+  .text-loss { color: var(--loss-red); }
+
+  /* ── Glow effects ─────────────────────────────── */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 20px rgba(0, 232, 143, 0.2);
+  }
+
+  /* ── Animation ────────────────────────────────── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeInUp 0.4s ease forwards;
+  }
+
+  .delay-1 { animation-delay: 0.05s; opacity: 0; }
+  .delay-2 { animation-delay: 0.1s; opacity: 0; }
+  .delay-3 { animation-delay: 0.15s; opacity: 0; }
+  .delay-4 { animation-delay: 0.2s; opacity: 0; }
+  .delay-5 { animation-delay: 0.25s; opacity: 0; }
+</style>
+</head>
+<body>
+
+<div class="phone-frame">
+  <!-- Dynamic Island -->
+  <div class="dynamic-island"></div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="status-bar-right">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.56 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="13" x2="23" y2="11"/></svg>
+    </div>
+  </div>
+
+  <!-- Screens -->
+  <div class="screens-container">
+
+    <!-- ═══ SCREEN 1: PORTFOLIO ═══════════════════ -->
+    <div class="screen active" id="screen-portfolio" data-od-id="portfolio">
+      <div class="screen-padding">
+        <!-- Greeting -->
+        <div class="greeting-row animate-in delay-1">
+          <div>
+            <p class="caption" style="margin-bottom: 2px;">Good morning</p>
+            <h1 class="heading-lg">Alex Chen</h1>
+          </div>
+          <div style="position: relative;">
+            <div class="avatar">A</div>
+            <span class="notif-badge"></span>
+          </div>
+        </div>
+
+        <!-- Portfolio Value -->
+        <div class="portfolio-value animate-in delay-2">
+          <p class="label">Total Portfolio Value</p>
+          <p class="mono-lg">$124,582.47</p>
+          <div class="portfolio-change">
+            <span>+$3,247.18</span>
+            <span class="pct">+2.68%</span>
+          </div>
+        </div>
+
+        <!-- Sparkline Chart -->
+        <div class="sparkline-container animate-in delay-3">
+          <svg viewBox="0 0 342 120" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00E88F" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#00E88F" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,90 C20,85 40,70 60,75 C80,80 100,55 120,50 C140,45 160,60 180,45 C200,30 220,40 240,35 C260,30 280,20 300,25 C320,15 342,10 342,10 L342,120 L0,120 Z" fill="url(#sparkGrad)"/>
+            <path d="M0,90 C20,85 40,70 60,75 C80,80 100,55 120,50 C140,45 160,60 180,45 C200,30 220,40 240,35 C260,30 280,20 300,25 C320,15 342,10 342,10" fill="none" stroke="#00E88F" stroke-width="2.5"/>
+            <circle cx="342" cy="10" r="4" fill="#00E88F"/>
+            <circle cx="342" cy="10" r="8" fill="#00E88F" opacity="0.2"/>
+          </svg>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions animate-in delay-3">
+          <div class="quick-action" onclick="switchTab(2)">
+            <div class="icon-circle" style="background: rgba(0, 232, 143, 0.12);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00E88F" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <span>Buy</span>
+          </div>
+          <div class="quick-action" onclick="switchTab(2)">
+            <div class="icon-circle" style="background: rgba(255, 92, 92, 0.12);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FF5C5C" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <span>Sell</span>
+          </div>
+          <div class="quick-action" onclick="switchTab(1)">
+            <div class="icon-circle" style="background: rgba(0, 212, 255, 0.12);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <span>Explore</span>
+          </div>
+          <div class="quick-action">
+            <div class="icon-circle" style="background: rgba(255, 217, 61, 0.12);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FFD93D" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <span>Alerts</span>
+          </div>
+        </div>
+
+        <!-- Holdings -->
+        <div class="section-header animate-in delay-4">
+          <h2 class="heading-md">Holdings</h2>
+          <a href="#">See all</a>
+        </div>
+
+        <div class="card animate-in delay-4">
+          <div class="holding-item" onclick="switchTab(3)">
+            <div class="holding-icon" style="background: linear-gradient(135deg, #6366F1, #818CF8);">
+              <span style="color: #fff;">A</span>
+            </div>
+            <div class="holding-info">
+              <p class="name">Apple Inc.</p>
+              <p class="ticker">AAPL · 15 shares</p>
+            </div>
+            <div class="holding-value">
+              <p class="price">$3,247.50</p>
+              <p class="change text-gain">+4.21%</p>
+            </div>
+          </div>
+
+          <div class="holding-item" onclick="switchTab(3)">
+            <div class="holding-icon" style="background: linear-gradient(135deg, #10B981, #34D399);">
+              <span style="color: #fff;">T</span>
+            </div>
+            <div class="holding-info">
+              <p class="name">Tesla, Inc.</p>
+              <p class="ticker">TSLA · 8 shares</p>
+            </div>
+            <div class="holding-value">
+              <p class="price">$2,156.80</p>
+              <p class="change text-loss">-1.83%</p>
+            </div>
+          </div>
+
+          <div class="holding-item" onclick="switchTab(3)">
+            <div class="holding-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">
+              <span style="color: #1E1B2E;">N</span>
+            </div>
+            <div class="holding-info">
+              <p class="name">NVIDIA Corp.</p>
+              <p class="ticker">NVDA · 12 shares</p>
+            </div>
+            <div class="holding-value">
+              <p class="price">$5,892.00</p>
+              <p class="change text-gain">+7.52%</p>
+            </div>
+          </div>
+
+          <div class="holding-item" onclick="switchTab(3)">
+            <div class="holding-icon" style="background: linear-gradient(135deg, #EC4899, #F472B6);">
+              <span style="color: #fff;">M</span>
+            </div>
+            <div class="holding-info">
+              <p class="name">Microsoft</p>
+              <p class="ticker">MSFT · 10 shares</p>
+            </div>
+            <div class="holding-value">
+              <p class="price">$4,128.90</p>
+              <p class="change text-gain">+2.14%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN 2: EXPLORE ═════════════════════ -->
+    <div class="screen" id="screen-explore" data-od-id="explore">
+      <div class="screen-padding">
+        <h1 class="heading-lg" style="margin-bottom: var(--spacing-xl);">Explore</h1>
+
+        <!-- Search -->
+        <div class="search-bar">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search stocks, ETFs, crypto...">
+        </div>
+
+        <!-- Categories -->
+        <div class="category-row">
+          <button class="category-chip active">All</button>
+          <button class="category-chip">Stocks</button>
+          <button class="category-chip">ETFs</button>
+          <button class="category-chip">Crypto</button>
+          <button class="category-chip">Commodities</button>
+        </div>
+
+        <!-- Trending -->
+        <div class="trending-card">
+          <div class="trending-header">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span class="heading-md" style="color: var(--accent-yellow);">Trending Now</span>
+          </div>
+          <div class="trending-stocks">
+            <div class="trending-stock" onclick="switchTab(3)">
+              <div class="mini-chart">
+                <svg viewBox="0 0 80 40" preserveAspectRatio="none">
+                  <path d="M0,35 C10,30 20,20 30,25 C40,30 50,15 60,10 C70,5 80,8 80,8" fill="none" stroke="#00E88F" stroke-width="2"/>
+                </svg>
+              </div>
+              <p class="ts-ticker">AAPL</p>
+              <p class="ts-change text-gain">+2.4%</p>
+            </div>
+            <div class="trending-stock" onclick="switchTab(3)">
+              <div class="mini-chart">
+                <svg viewBox="0 0 80 40" preserveAspectRatio="none">
+                  <path d="M0,20 C10,25 20,15 30,18 C40,20 50,30 60,28 C70,25 80,32 80,32" fill="none" stroke="#FF5C5C" stroke-width="2"/>
+                </svg>
+              </div>
+              <p class="ts-ticker">TSLA</p>
+              <p class="ts-change text-loss">-1.2%</p>
+            </div>
+            <div class="trending-stock" onclick="switchTab(3)">
+              <div class="mini-chart">
+                <svg viewBox="0 0 80 40" preserveAspectRatio="none">
+                  <path d="M0,30 C10,25 20,28 30,18 C40,10 50,12 60,5 C70,2 80,8 80,8" fill="none" stroke="#00E88F" stroke-width="2"/>
+                </svg>
+              </div>
+              <p class="ts-ticker">NVDA</p>
+              <p class="ts-change text-gain">+5.8%</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Gainers -->
+        <div class="section-header">
+          <h2 class="heading-md">Top Gainers</h2>
+          <a href="#">See all</a>
+        </div>
+
+        <div class="card" style="margin-bottom: var(--spacing-xl);">
+          <div class="mover-item" onclick="switchTab(3)">
+            <span class="mover-rank">1</span>
+            <div class="mover-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);"><span style="color: #1E1B2E;">N</span></div>
+            <div class="mover-sparkline">
+              <svg viewBox="0 0 60 30" preserveAspectRatio="none"><path d="M0,25 C10,20 20,22 30,12 C40,5 50,8 60,2" fill="none" stroke="#00E88F" stroke-width="1.5"/></svg>
+            </div>
+            <div class="mover-info">
+              <p class="mover-name">NVIDIA</p>
+              <p class="mover-ticker">NVDA</p>
+            </div>
+            <div class="mover-price">
+              <p class="mp">$491.00</p>
+              <p class="mc text-gain">+7.52%</p>
+            </div>
+          </div>
+
+          <div class="mover-item" onclick="switchTab(3)">
+            <span class="mover-rank">2</span>
+            <div class="mover-icon" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);"><span style="color: #fff;">A</span></div>
+            <div class="mover-sparkline">
+              <svg viewBox="0 0 60 30" preserveAspectRatio="none"><path d="M0,28 C10,22 20,20 30,15 C40,10 50,12 60,5" fill="none" stroke="#00E88F" stroke-width="1.5"/></svg>
+            </div>
+            <div class="mover-info">
+              <p class="mover-name">AMD</p>
+              <p class="mover-ticker">AMD</p>
+            </div>
+            <div class="mover-price">
+              <p class="mp">$164.20</p>
+              <p class="mc text-gain">+5.31%</p>
+            </div>
+          </div>
+
+          <div class="mover-item" onclick="switchTab(3)">
+            <span class="mover-rank">3</span>
+            <div class="mover-icon" style="background: linear-gradient(135deg, #06B6D4, #22D3EE);"><span style="color: #1E1B2E;">S</span></div>
+            <div class="mover-sparkline">
+              <svg viewBox="0 0 60 30" preserveAspectRatio="none"><path d="M0,22 C10,25 20,18 30,20 C40,15 50,10 60,8" fill="none" stroke="#00E88F" stroke-width="1.5"/></svg>
+            </div>
+            <div class="mover-info">
+              <p class="mover-name">Shopify</p>
+              <p class="mover-ticker">SHOP</p>
+            </div>
+            <div class="mover-price">
+              <p class="mp">$78.45</p>
+              <p class="mc text-gain">+4.87%</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Losers -->
+        <div class="section-header">
+          <h2 class="heading-md">Top Losers</h2>
+          <a href="#">See all</a>
+        </div>
+
+        <div class="card">
+          <div class="mover-item" onclick="switchTab(3)">
+            <span class="mover-rank">1</span>
+            <div class="mover-icon" style="background: linear-gradient(135deg, #EF4444, #F87171);"><span style="color: #fff;">R</span></div>
+            <div class="mover-sparkline">
+              <svg viewBox="0 0 60 30" preserveAspectRatio="none"><path d="M0,5 C10,8 20,12 30,18 C40,22 50,25 60,28" fill="none" stroke="#FF5C5C" stroke-width="1.5"/></svg>
+            </div>
+            <div class="mover-info">
+              <p class="mover-name">Rivian</p>
+              <p class="mover-ticker">RIVN</p>
+            </div>
+            <div class="mover-price">
+              <p class="mp">$14.82</p>
+              <p class="mc text-loss">-6.14%</p>
+            </div>
+          </div>
+
+          <div class="mover-item" onclick="switchTab(3)">
+            <span class="mover-rank">2</span>
+            <div class="mover-icon" style="background: linear-gradient(135deg, #F97316, #FB923C);"><span style="color: #1E1B2E;">L</span></div>
+            <div class="mover-sparkline">
+              <svg viewBox="0 0 60 30" preserveAspectRatio="none"><path d="M0,8 C10,10 20,15 30,18 C40,22 50,20 60,25" fill="none" stroke="#FF5C5C" stroke-width="1.5"/></svg>
+            </div>
+            <div class="mover-info">
+              <p class="mover-name">Lucid</p>
+              <p class="mover-ticker">LCID</p>
+            </div>
+            <div class="mover-price">
+              <p class="mp">$3.47</p>
+              <p class="mc text-loss">-4.93%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN 3: STOCK DETAIL ═════════════════ -->
+    <div class="screen" id="screen-detail" data-od-id="stock-detail">
+      <div class="screen-padding">
+        <!-- Header -->
+        <div class="stock-header">
+          <button class="back-btn" onclick="switchTab(0)">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="stock-title-row">
+            <h1>Apple Inc.</h1>
+            <span class="ticker-badge">AAPL · NASDAQ</span>
+          </div>
+          <button class="btn btn--ghost btn--round" style="border: none; background: var(--bg-card);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+        </div>
+
+        <!-- Price -->
+        <div class="stock-price-block">
+          <p class="current-price text-gain">$216.50</p>
+          <div class="price-change">
+            <span class="text-gain">+$8.73 (+4.21%)</span>
+          </div>
+        </div>
+
+        <!-- Time Period Pills -->
+        <div class="time-pills">
+          <button class="time-pill">1H</button>
+          <button class="time-pill active">1D</button>
+          <button class="time-pill">1W</button>
+          <button class="time-pill">1M</button>
+          <button class="time-pill">1Y</button>
+          <button class="time-pill">ALL</button>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-area">
+          <svg viewBox="0 0 342 180" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00E88F" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#00E88F" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- Grid lines -->
+            <line x1="0" y1="45" x2="342" y2="45" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0" y1="90" x2="342" y2="90" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="0" y1="135" x2="342" y2="135" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <!-- Area fill -->
+            <path d="M0,140 C15,135 30,120 45,125 C60,130 75,100 90,95 C105,90 120,110 135,105 C150,80 165,85 180,70 C195,60 210,75 225,65 C240,55 255,50 270,40 C285,35 300,45 315,30 L342,20 L342,180 L0,180 Z" fill="url(#chartGrad)"/>
+            <!-- Line -->
+            <path d="M0,140 C15,135 30,120 45,125 C60,130 75,100 90,95 C105,90 120,110 135,105 C150,80 165,85 180,70 C195,60 210,75 225,65 C240,55 255,50 270,40 C285,35 300,45 315,30 L342,20" fill="none" stroke="#00E88F" stroke-width="2.5"/>
+            <!-- Current price dot -->
+            <circle cx="342" cy="20" r="5" fill="#00E88F"/>
+            <circle cx="342" cy="20" r="10" fill="#00E88F" opacity="0.15"/>
+            <!-- Price label -->
+            <rect x="270" y="6" width="50" height="18" rx="4" fill="var(--bg-card-elevated)"/>
+            <text x="295" y="18" fill="#00E88F" font-family="monospace" font-size="10" text-anchor="middle" font-weight="600">$216.50</text>
+          </svg>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-item">
+            <p class="stat-label">Open</p>
+            <p class="stat-value">$207.77</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-label">High</p>
+            <p class="stat-value text-gain">$218.44</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-label">Low</p>
+            <p class="stat-value">$206.12</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-label">Volume</p>
+            <p class="stat-value">58.2M</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-label">Mkt Cap</p>
+            <p class="stat-value">$3.34T</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-label">P/E Ratio</p>
+            <p class="stat-value">33.82</p>
+          </div>
+        </div>
+
+        <!-- About -->
+        <div class="card" style="padding: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
+          <h3 class="heading-md" style="margin-bottom: var(--spacing-sm);">About AAPL</h3>
+          <p class="body-text" style="font-size: 13px;">Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, Mac, iPad, and wearables, home and accessories.</p>
+          <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md); flex-wrap: wrap;">
+            <span class="chip chip--accent">Technology</span>
+            <span class="chip chip--pink">Consumer Electronics</span>
+            <span class="chip chip--gain">$3.34T</span>
+          </div>
+        </div>
+
+        <!-- Trade Actions -->
+        <div class="trade-actions">
+          <button class="btn btn--gain" onclick="switchTab(2)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Buy AAPL
+          </button>
+          <button class="btn btn--loss" onclick="switchTab(2)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Sell
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN 4: TRADE ════════════════════════ -->
+    <div class="screen" id="screen-trade" data-od-id="trade">
+      <div class="screen-padding">
+        <h1 class="heading-lg" style="margin-bottom: var(--spacing-xl);">Trade</h1>
+
+        <!-- Buy/Sell Toggle -->
+        <div class="trade-type-toggle">
+          <button class="trade-type-btn active-buy" id="btn-buy" onclick="toggleTradeType('buy')">Buy</button>
+          <button class="trade-type-btn" id="btn-sell" onclick="toggleTradeType('sell')">Sell</button>
+        </div>
+
+        <!-- Order Type -->
+        <div class="order-type-row">
+          <button class="order-type-chip active">Market</button>
+          <button class="order-type-chip">Limit</button>
+          <button class="order-type-chip">Stop</button>
+        </div>
+
+        <!-- Stock Selector -->
+        <div class="stock-selector">
+          <div class="ss-icon" style="background: linear-gradient(135deg, #6366F1, #818CF8);">
+            <span style="color: #fff;">A</span>
+          </div>
+          <div class="ss-info">
+            <p class="ss-name">Apple Inc.</p>
+            <p class="ss-ticker">AAPL</p>
+          </div>
+          <div class="ss-price">
+            <p class="price-val text-gain">$216.50</p>
+          </div>
+          <div class="ss-arrow">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="input-group">
+          <label class="input-label">Quantity (Shares)</label>
+          <div class="input-field">
+            <button class="step-btn" onclick="adjustQty(-1)">−</button>
+            <input type="number" id="qty-input" value="10" min="1" max="9999">
+            <button class="step-btn" onclick="adjustQty(1)">+</button>
+          </div>
+          <p class="input-hint">Available: $42,830.00 buying power</p>
+        </div>
+
+        <!-- Estimated Price -->
+        <div class="input-group">
+          <label class="input-label">Market Price</label>
+          <div class="input-field" style="pointer-events: none; opacity: 0.7;">
+            <input type="text" value="$216.50" style="font-size: 18px;" readonly>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+          <h3 class="heading-md" style="margin-bottom: var(--spacing-md); padding: 0 var(--spacing-lg);">Order Summary</h3>
+          <div class="summary-row">
+            <span class="summary-label">Shares</span>
+            <span class="summary-value" id="summary-shares">10</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Market Price</span>
+            <span class="summary-value">$216.50</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Estimated Fee</span>
+            <span class="summary-value">$0.00</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span class="summary-label">Estimated Total</span>
+            <span class="summary-value" id="summary-total">$2,165.00</span>
+          </div>
+        </div>
+
+        <!-- Swipe to Buy -->
+        <div class="swipe-hint">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <span>Swipe to confirm</span>
+        </div>
+
+        <div class="slide-btn-container">
+          <button class="slide-btn slide-btn--buy" id="trade-confirm-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Buy AAPL</span>
+          </button>
+        </div>
+
+        <!-- Disclaimer -->
+        <p style="font-size: 11px; color: var(--text-muted); text-align: center; line-height: 1.6;">
+          Market orders execute at the best available price. Your capital is at risk. Past performance is not indicative of future results.
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══ SCREEN 5: PROFILE ═════════════════════ -->
+    <div class="screen" id="screen-profile" data-od-id="profile">
+      <div class="screen-padding">
+        <!-- Profile Header -->
+        <div style="text-align: center; padding: var(--spacing-xl) 0;">
+          <div class="avatar" style="width: 72px; height: 72px; font-size: 28px; margin: 0 auto var(--spacing-lg);">A</div>
+          <h1 class="heading-lg">Alex Chen</h1>
+          <p class="body-text">alex.chen@email.com</p>
+          <div style="display: flex; justify-content: center; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+            <span class="chip chip--accent">Pro Trader</span>
+            <span class="chip chip--gain">Verified</span>
+          </div>
+        </div>
+
+        <!-- Account Stats -->
+        <div class="card" style="padding: var(--spacing-lg); margin-bottom: var(--spacing-xl);">
+          <div style="display: flex; justify-content: space-around; text-align: center;">
+            <div>
+              <p class="mono-md text-gain">$124.5K</p>
+              <p class="caption">Portfolio</p>
+            </div>
+            <div style="width: 1px; background: var(--border-subtle);"></div>
+            <div>
+              <p class="mono-md">47</p>
+              <p class="caption">Trades</p>
+            </div>
+            <div style="width: 1px; background: var(--border-subtle);"></div>
+            <div>
+              <p class="mono-md text-gain">+18.4%</p>
+              <p class="caption">All-Time</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings List -->
+        <div class="card" style="padding: 0; overflow: hidden; margin-bottom: var(--spacing-lg); border-radius: var(--radius-lg);">
+          <div class="holding-item" style="padding: var(--spacing-lg) var(--spacing-lg);">
+            <div class="icon-circle" style="width: 36px; height: 36px; background: rgba(0, 212, 255, 0.12); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <div class="holding-info">
+              <p class="name">Linked Accounts</p>
+              <p class="caption">Bank & brokerage connections</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+          <div class="holding-item" style="padding: var(--spacing-lg) var(--spacing-lg);">
+            <div class="icon-circle" style="width: 36px; height: 36px; background: rgba(255, 92, 170, 0.12); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF5C8A" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </div>
+            <div class="holding-info">
+              <p class="name">Notifications</p>
+              <p class="caption">Alerts & price triggers</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+          <div class="holding-item" style="padding: var(--spacing-lg) var(--spacing-lg);">
+            <div class="icon-circle" style="width: 36px; height: 36px; background: rgba(255, 217, 61, 0.12); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD93D" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <div class="holding-info">
+              <p class="name">Settings</p>
+              <p class="caption">Security, preferences, theme</p>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+
+        <!-- Sign Out -->
+        <button class="btn btn--ghost btn--full" style="color: var(--loss-red); border-color: rgba(255, 92, 92, 0.2);">
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="switchTab(0)" data-tab="0">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="nav-item" onclick="switchTab(1)" data-tab="1">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>Explore</span>
+    </button>
+    <button class="nav-item" onclick="switchTab(2)" data-tab="2">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <span>Trade</span>
+    </button>
+    <button class="nav-item" onclick="switchTab(4)" data-tab="4">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </button>
+  </nav>
+</div>
+
+<script>
+  // ── Tab Navigation ─────────────────────────────
+  function switchTab(index) {
+    const screens = document.querySelectorAll('.screen');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    // Map tab index to screen IDs
+    const screenMap = ['screen-portfolio', 'screen-explore', 'screen-trade', 'screen-detail', 'screen-profile'];
+    
+    screens.forEach(s => s.classList.remove('active'));
+    navItems.forEach(n => n.classList.remove('active'));
+    
+    const targetScreen = document.getElementById(screenMap[index]);
+    if (targetScreen) {
+      targetScreen.classList.add('active');
+      targetScreen.scrollTop = 0;
+    }
+    
+    // Update nav (0=Home, 1=Explore, 2=Trade, 4=Profile)
+    const navMap = [0, 1, 2, -1, 3]; // screen index -> nav index
+    const navIdx = navMap[index];
+    if (navIdx >= 0 && navItems[navIdx]) {
+      navItems[navIdx].classList.add('active');
+    }
+  }
+
+  // ── Trade Type Toggle ──────────────────────────
+  function toggleTradeType(type) {
+    const buyBtn = document.getElementById('btn-buy');
+    const sellBtn = document.getElementById('btn-sell');
+    const confirmBtn = document.getElementById('trade-confirm-btn');
+    
+    if (type === 'buy') {
+      buyBtn.className = 'trade-type-btn active-buy';
+      sellBtn.className = 'trade-type-btn';
+      confirmBtn.className = 'slide-btn slide-btn--buy';
+      confirmBtn.querySelector('span').textContent = 'Buy AAPL';
+    } else {
+      buyBtn.className = 'trade-type-btn';
+      sellBtn.className = 'trade-type-btn active-sell';
+      confirmBtn.className = 'slide-btn slide-btn--sell';
+      confirmBtn.querySelector('span').textContent = 'Sell AAPL';
+    }
+  }
+
+  // ── Quantity Adjust ────────────────────────────
+  function adjustQty(delta) {
+    const input = document.getElementById('qty-input');
+    let val = parseInt(input.value) || 1;
+    val = Math.max(1, Math.min(9999, val + delta));
+    input.value = val;
+    
+    document.getElementById('summary-shares').textContent = val;
+    const total = (val * 216.50).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    document.getElementById('summary-total').textContent = total;
+  }
+
+  // ── Category Chip Toggle ───────────────────────
+  document.querySelectorAll('.category-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // ── Time Pill Toggle ───────────────────────────
+  document.querySelectorAll('.time-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.time-pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // ── Order Type Chip Toggle ─────────────────────
+  document.querySelectorAll('.order-type-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      document.querySelectorAll('.order-type-chip').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
