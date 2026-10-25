@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a fantasy trading card at the trading-card size (2.5 × 3.5 in, rounded corners), front and back. Dark slate frame with brass trim and parchment text boxes: a name bar with a round cost gem, a framed art window for my artwork, a type line, a rules box with an italic flavour line, and attack / health stats in the bottom corner. The back is one shared emblem design. Keep all text inside the safe area. Use my card list if I give you one; otherwise make one sample card and mark the set name, number and artist as `—`."
+      }
+    }
+  }
+}

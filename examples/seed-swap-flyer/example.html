@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Seed Swap — Community Flyer (A5)</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4eedf;
+    --green:#1f5b3a;
+    --coral:#e8603c;
+    --ink:#1b1a17;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    min-height:100vh;
+    background:#d9d3c4;
+    display:grid;
+    place-items:center;
+    padding:40px 0;
+    font-family:'Bricolage Grotesque', sans-serif;
+    color:var(--ink);
+  }
+  /* A5 portrait: 148 × 210 mm */
+  .flyer{
+    width:592px;
+    max-width:94vw;
+    aspect-ratio:148/210;
+    background:var(--paper);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    padding:40px 40px 32px;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.35);
+  }
+  .top{
+    display:flex;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--green);
+  }
+  .art{
+    position:relative;
+    height:230px;
+    margin:22px 0 20px;
+  }
+  .art svg{ width:100%; height:100%; display:block; }
+  h1{
+    margin:0;
+    font-weight:800;
+    font-size:104px;
+    line-height:.86;
+    letter-spacing:-.04em;
+    color:var(--green);
+  }
+  h1 span{ color:var(--coral); }
+  .dek{
+    margin:16px 0 0;
+    font-size:17px;
+    line-height:1.4;
+    font-weight:500;
+    max-width:34ch;
+  }
+  .info{
+    margin-top:auto;
+    border-top:2px solid var(--green);
+  }
+  .row{
+    display:grid;
+    grid-template-columns:96px 1fr;
+    gap:12px;
+    padding:9px 0;
+    border-bottom:1px solid rgba(31,91,58,.35);
+    font-size:16px;
+    font-weight:500;
+  }
+  .row dt{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--green);
+    padding-top:3px;
+  }
+  .row dd{ margin:0; }
+  .foot{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-top:16px;
+    font-size:13px;
+    line-height:1.35;
+  }
+  .foot strong{ color:var(--coral); }
+  .stamp{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    border:1.5px solid var(--green);
+    color:var(--green);
+    padding:6px 8px;
+    text-align:center;
+    line-height:1.5;
+  }
+</style>
+</head>
+<body>
+  <main class="flyer" data-od-card>
+    <div class="top">
+      <span>Free · All welcome</span>
+      <span>Spring edition</span>
+    </div>
+
+    <div class="art" aria-hidden="true">
+      <!-- Riso-style two-colour seed heads and sprouts, flat fills only -->
+      <svg viewBox="0 0 512 230" preserveAspectRatio="xMidYMid meet">
+        <g fill="none" stroke="#1f5b3a" stroke-width="5" stroke-linecap="round">
+          <path d="M70 230 V128"/><path d="M70 160 C40 150 30 128 34 108 C58 112 70 132 70 160"/><path d="M70 146 C98 138 108 116 104 96 C80 100 70 120 70 146"/>
+          <path d="M256 230 V96"/><path d="M256 140 C220 128 208 100 214 74 C242 80 256 106 256 140"/><path d="M256 120 C292 108 304 82 298 56 C270 62 256 88 256 120"/>
+          <path d="M440 230 V138"/><path d="M440 170 C414 162 404 142 408 124 C430 128 440 146 440 170"/><path d="M440 156 C466 148 476 128 472 110 C450 114 440 132 440 156"/>
+        </g>
+        <g fill="#e8603c">
+          <ellipse cx="160" cy="70" rx="13" ry="20" transform="rotate(-28 160 70)"/>
+          <ellipse cx="352" cy="44" rx="11" ry="17" transform="rotate(22 352 44)"/>
+          <ellipse cx="148" cy="170" rx="9" ry="14" transform="rotate(40 148 170)"/>
+          <ellipse cx="364" cy="160" rx="12" ry="18" transform="rotate(-16 364 160)"/>
+          <circle cx="30" cy="40" r="7"/><circle cx="486" cy="70" r="6"/>
+        </g>
+        <g fill="#1f5b3a" opacity=".85">
+          <circle cx="196" cy="128" r="5"/><circle cx="318" cy="118" r="5"/><circle cx="118" cy="40" r="4"/><circle cx="410" cy="34" r="4"/>
+        </g>
+      </svg>
+    </div>
+
+    <h1>Seed<br><span>Swap</span></h1>
+    <p class="dek">Bring the seeds you saved, take home what your neighbours grew. No seeds? Come anyway — there’s always plenty.</p>
+
+    <dl class="info">
+      <div class="row"><dt>When</dt><dd>— Saturday, date —, 10:00–13:00</dd></div>
+      <div class="row"><dt>Where</dt><dd>— Community garden or library, address —</dd></div>
+      <div class="row"><dt>Bring</dt><dd>Seeds in labelled envelopes, cuttings, spare pots</dd></div>
+    </dl>
+
+    <div class="foot">
+      <div>Hosted by <strong>— your group —</strong><br>Questions: — email or phone —</div>
+      <div class="stamp">Swap<br>don’t shop</div>
+    </div>
+  </main>
+</body>
+</html>

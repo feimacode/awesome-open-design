@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Design a wide shop banner (shop-banner size) for my handmade jewelry store launching a new collection. Warm sand and clay colours, an elegant serif for the collection name with one word in italic, one short sentence about how it's made, a dark pill 'Shop the collection' button, and on the right an arch-shaped window for my product photo with a small name and price tag. Use my product photo if I give you one; otherwise leave a clearly marked placeholder, and don't invent prices."
+      }
+    }
+  }
+}

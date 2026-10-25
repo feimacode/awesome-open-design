@@ -1,0 +1,21 @@
+name: Request a design
+description: Ask for a kind of design you'd like to remix from the gallery.
+labels: ["design request"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What would you like to make?
+      description: For example "a price list for my nail salon that prints on A5 and posts as a Story".
+    validations:
+      required: true
+  - type: textarea
+    id: use
+    attributes:
+      label: Where will it be used?
+      description: Printed, posted on social media, sent to a client, put in a shop…
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples you like
+      description: Links or images of designs that look the way you want.
