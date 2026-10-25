@@ -68,22 +68,36 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <sub><a href="examples/editorial-serif-resume">Editorial Serif Resume</a></sub>
 </td>
 <td align="center" width="33%">
+<a href="examples/fantasy-trading-card"><img src="examples/fantasy-trading-card/thumbnail.png" width="280" alt="Fantasy Trading Card — Front and Back"></a><br />
+<sub><a href="examples/fantasy-trading-card">Fantasy Trading Card — Front and Back</a></sub>
+</td>
+<td align="center" width="33%">
 <a href="examples/field-notes-deck"><img src="examples/field-notes-deck/thumbnail.png" width="280" alt="Field Notes — Deck Opener"></a><br />
 <sub><a href="examples/field-notes-deck">Field Notes — Deck Opener</a></sub>
 </td>
+</tr>
+<tr>
 <td align="center" width="33%">
 <a href="examples/fracture-bloom-poster"><img src="examples/fracture-bloom-poster/thumbnail.png" width="280" alt="Fracture &amp; Bloom — Exhibition Poster"></a><br />
 <sub><a href="examples/fracture-bloom-poster">Fracture &amp; Bloom — Exhibition Poster</a></sub>
 </td>
-</tr>
-<tr>
 <td align="center" width="33%">
 <a href="examples/grid-collage-announcement"><img src="examples/grid-collage-announcement/thumbnail.png" width="280" alt="Grid Collage Announcement Post"></a><br />
 <sub><a href="examples/grid-collage-announcement">Grid Collage Announcement Post</a></sub>
 </td>
 <td align="center" width="33%">
+<a href="examples/jewelry-shop-banner"><img src="examples/jewelry-shop-banner/thumbnail.png" width="280" alt="Handmade Jewelry — Shop Banner"></a><br />
+<sub><a href="examples/jewelry-shop-banner">Handmade Jewelry — Shop Banner</a></sub>
+</td>
+</tr>
+<tr>
+<td align="center" width="33%">
 <a href="examples/liquid-bg-hero"><img src="examples/liquid-bg-hero/thumbnail.png" width="280" alt="Liquid Background Hero"></a><br />
 <sub><a href="examples/liquid-bg-hero">Liquid Background Hero</a></sub>
+</td>
+<td align="center" width="33%">
+<a href="examples/market-stall-story"><img src="examples/market-stall-story/thumbnail.png" width="280" alt="Find Us at the Market — Story"></a><br />
+<sub><a href="examples/market-stall-story">Find Us at the Market — Story</a></sub>
 </td>
 <td align="center" width="33%">
 <a href="examples/metrics-deck-dark"><img src="examples/metrics-deck-dark/thumbnail.png" width="280" alt="Dark Metrics — Single Stat Slide"></a><br />
@@ -122,6 +136,20 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 <td align="center" width="33%">
 <a href="examples/quote-carousel-card"><img src="examples/quote-carousel-card/thumbnail.png" width="280" alt="Quote Carousel Card"></a><br />
 <sub><a href="examples/quote-carousel-card">Quote Carousel Card</a></sub>
+</td>
+<td align="center" width="33%">
+<a href="examples/recipe-carousel"><img src="examples/recipe-carousel/thumbnail.png" width="280" alt="Recipe Carousel — Three Square Cards"></a><br />
+<sub><a href="examples/recipe-carousel">Recipe Carousel — Three Square Cards</a></sub>
+</td>
+<td align="center" width="33%">
+<a href="examples/seed-swap-flyer"><img src="examples/seed-swap-flyer/thumbnail.png" width="280" alt="Seed Swap — Community Flyer (A5)"></a><br />
+<sub><a href="examples/seed-swap-flyer">Seed Swap — Community Flyer (A5)</a></sub>
+</td>
+</tr>
+<tr>
+<td align="center" width="33%">
+<a href="examples/stockpulse-mobile-trading-app"><img src="examples/stockpulse-mobile-trading-app/thumbnail.png" width="280" alt="StockPulse — Mobile Trading App"></a><br />
+<sub><a href="examples/stockpulse-mobile-trading-app">StockPulse — Mobile Trading App</a></sub>
 </td>
 <td align="center" width="33%">
 <a href="examples/two-column-mono-resume"><img src="examples/two-column-mono-resume/thumbnail.png" width="280" alt="Two-Column Monochrome Resume"></a><br />
