@@ -1,0 +1,9 @@
+{
+  "od": {
+    "useCase": {
+      "query": {
+        "en": "Create a mobile app design for a stock trading app. The app should include multiple screens: a home/portfolio dashboard showing total balance and holdings, a stock detail page with a candlestick chart and key metrics, a search/explore stocks screen, and a trade execution screen with buy/sell actions. The design should feel modern, professional, and trustworthy — think dark mode fintech aesthetic with green/red for gains/losses, clean typography, and intuitive mobile-first UX. Target iPhone-sized screens (390px width)."
+      }
+    }
+  }
+}
