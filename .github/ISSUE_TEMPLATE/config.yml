@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions about the kit
+    url: https://github.com/feimacode/open-design-agent-kit/discussions/categories/q-a
+    about: Installing, using or troubleshooting Open Design Agent Kit.
+  - name: Bugs in the kit
+    url: https://github.com/feimacode/open-design-agent-kit/issues/new/choose
+    about: Problems with the extension, plugin, MCP server or CLI.

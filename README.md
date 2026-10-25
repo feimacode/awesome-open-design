@@ -12,6 +12,10 @@ Each tagged release of this repo is a snapshot the extension can fetch at runtim
 - Running **OpenDesign: Sync Community Designs** (or the extension's own first-run sync) downloads that tag's `examples/` folder into a local cache and merges it into the Gallery, tagged `community` so it's visually distinguishable from the built-in catalog.
 - This content is **not reviewed the way the built-in catalog is** — it renders in a slightly more restrictive sandbox and is clearly labeled wherever it appears.
 
+**Using Claude Code, Claude Desktop, Codex or Cursor?** The automatic sync is a VS Code feature, but every design here works in any agent with the kit installed: copy the `example_prompt` from a design's `SKILL.md`, or give your agent the link to its `example.html` and ask it to remix that design with your own content.
+
+**Want a design that isn't here?** [Request one](https://github.com/feimacode/awesome-open-design/issues/new?template=request-a-design.yml), or make it and send a pull request (see [CONTRIBUTING.md](CONTRIBUTING.md)).
+
 ## Examples
 
 <!-- THUMBNAILS:START -->
