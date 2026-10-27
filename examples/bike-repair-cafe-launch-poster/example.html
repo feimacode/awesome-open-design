@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080">
+<title>Bike Repair Café launch poster: annotated bike diagram</title>
+<style>
+  :root {
+    --primary: #c084fc; --secondary: #00BCFF; --success: #39ff88;
+    --warning: #fff34d; --danger: #ff4d8d; --surface: #111126; --text: #f8f7ff;
+    --sans: Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Source Code Pro", ui-monospace, "DejaVu Sans Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05050f; }
+  .poster { width: 1080px; height: 1920px; margin: 0 auto; position: relative; overflow: hidden;
+    color: var(--text); font-family: var(--sans);
+    background:
+      linear-gradient(rgba(0,188,255,.07) 2px, transparent 2px) 0 0 / 48px 48px,
+      linear-gradient(90deg, rgba(0,188,255,.07) 2px, transparent 2px) 0 0 / 48px 48px,
+      var(--surface); }
+
+  .headline { position: absolute; top: 80px; left: 64px; right: 64px; display: flex; justify-content: space-between; align-items: baseline; }
+  .headline h1 { font-size: 56px; font-weight: 900; letter-spacing: -.01em; }
+  .headline h1 span { color: var(--primary); text-shadow: 0 0 16px rgba(192,132,252,.8); }
+  .spec { font-family: var(--mono); font-size: 20px; letter-spacing: .14em; color: var(--secondary); text-transform: uppercase; }
+
+  /* dominant diagram */
+  .diagram { position: absolute; top: 200px; left: 0; width: 1080px; height: 1080px; }
+  .diagram svg.bike { position: absolute; left: 64px; top: 260px; width: 952px;
+    filter: drop-shadow(0 0 8px var(--secondary)) drop-shadow(0 0 28px rgba(0,188,255,.55)); }
+
+  .call { position: absolute; font-family: var(--mono); }
+  .call .pin { width: 28px; height: 28px; border-radius: 50%; border: 4px solid currentColor; box-shadow: 0 0 16px currentColor; background: var(--surface); }
+  .call .box { position: absolute; width: 300px; padding: 16px 20px; border: 2px solid currentColor; border-radius: 12px; background: rgba(17,17,38,.92); }
+  .call .box b { display: block; font-size: 26px; margin-bottom: 4px; }
+  .call .box span { color: var(--text); font-size: 20px; line-height: 1.35; font-family: var(--sans); }
+  .call .line { position: absolute; border-top: 3px dashed currentColor; transform-origin: 0 0; }
+
+  /* pins sit on the bike, in diagram coords: 64 + 1.587·svg x, 260 + 1.587·svg y, minus 14 for the pin centre */
+  .k1 { color: var(--success); left: 145px; top: 771px; }
+  .k1 .box { left: -60px; top: 100px; } .k1 .line { left: 14px; top: 14px; width: 90px; transform: rotate(90deg); }
+  .k2 { color: var(--warning); left: 526px; top: 659px; }
+  .k2 .box { left: -40px; top: 180px; } .k2 .line { left: 14px; top: 14px; width: 170px; transform: rotate(90deg); }
+  .k3 { color: var(--danger); left: 447px; top: 401px; }
+  .k3 .box { left: -380px; top: -170px; } .k3 .line { left: 14px; top: 14px; width: 150px; transform: rotate(-150deg); }
+  .k4 { color: var(--primary); left: 780px; top: 373px; }
+  .k4 .box { left: -40px; top: -200px; width: 320px; } .k4 .line { left: 14px; top: 14px; width: 110px; transform: rotate(-90deg); }
+
+  .one-liner { position: absolute; top: 1250px; left: 64px; right: 64px; display: flex; justify-content: space-between; align-items: center; }
+  .one-liner p { font-size: 40px; font-weight: 700; max-width: 620px; }
+  .btn { background: var(--primary); color: var(--surface); font-weight: 900; font-size: 30px; padding: 20px 32px; border-radius: 14px;
+    box-shadow: 0 0 32px rgba(192,132,252,.7); }
+
+  /* walkthrough as steps/tabs */
+  .walk { position: absolute; left: 64px; right: 64px; bottom: 80px; }
+  .tabs { display: flex; gap: 8px; }
+  .tab { flex: 1; font-family: var(--mono); font-size: 22px; letter-spacing: .1em; text-transform: uppercase;
+    padding: 18px 20px; border: 2px solid rgba(248,247,255,.2); border-bottom: none; border-radius: 14px 14px 0 0; opacity: .6; }
+  .tab.on { opacity: 1; border-color: var(--secondary); color: var(--secondary); box-shadow: 0 -6px 24px rgba(0,188,255,.3); }
+  .panel { border: 2px solid var(--secondary); border-radius: 0 0 18px 18px; padding: 32px; display: grid; grid-template-columns: 1fr 200px; gap: 32px; align-items: center;
+    background: rgba(0,188,255,.06); }
+  .panel h3 { font-size: 40px; font-weight: 900; }
+  .panel p { font-size: 24px; line-height: 1.4; margin-top: 12px; opacity: .85; }
+  .panel .meta { font-family: var(--mono); font-size: 22px; line-height: 1.7; margin-top: 20px; color: var(--warning); }
+  .qr { width: 200px; height: 200px; background: var(--text); border-radius: 12px; padding: 12px; }
+</style>
+</head>
+<body>
+<main class="poster" data-od-card>
+  <div class="headline">
+    <h1>Bike Repair <span>Café</span></h1>
+    <div class="spec">Fig. 1 · your bike</div>
+  </div>
+
+  <div class="diagram" aria-label="Neon diagram of a bicycle with repair callouts">
+    <svg class="bike" viewBox="0 0 600 380" fill="none" stroke="#00BCFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="130" cy="260" r="100"/><circle cx="130" cy="260" r="88" stroke-width="2" opacity=".5"/>
+      <circle cx="470" cy="260" r="100"/><circle cx="470" cy="260" r="88" stroke-width="2" opacity=".5"/>
+      <path d="M130 260 L280 260 L250 115 Z M250 115 L425 115 M280 260 L432 150 L470 260 M425 115 L432 150"/>
+      <path d="M228 98 H278 M250 115 V98"/><path d="M425 115 L415 80 H460"/>
+      <circle cx="280" cy="260" r="22"/><path d="M280 260 L300 300 M290 300 H312"/>
+      <path d="M140 250 L270 250" stroke-width="2" stroke-dasharray="6 6"/>
+    </svg>
+
+    <div class="call k1"><div class="line"></div><div class="pin"></div><div class="box"><b>Flat tyre?</b><span>We’ll show you how to find and patch it.</span></div></div>
+    <div class="call k2"><div class="line"></div><div class="pin"></div><div class="box"><b>Chain slipping?</b><span>Clean, oil, re-index the gears.</span></div></div>
+    <div class="call k3"><div class="line"></div><div class="pin"></div><div class="box"><b>Saddle too low?</b><span>Fit check in two minutes.</span></div></div>
+    <div class="call k4"><div class="line"></div><div class="pin"></div><div class="box"><b>Brakes squeal?</b><span>Pads, cables and a proper tune.</span></div></div>
+  </div>
+
+  <div class="one-liner">
+    <p>Whatever’s wrong, we’ll fix it with you.</p>
+    <div class="btn">Opens [Sat date]</div>
+  </div>
+
+  <section class="walk">
+    <div class="tabs">
+      <div class="tab on">01 Bring</div><div class="tab">02 Fix</div><div class="tab">03 Ride</div>
+    </div>
+    <div class="panel">
+      <div>
+        <h3>Bring your bike, as it is.</h3>
+        <p>No booking, no fee. Volunteer mechanics, shared tools, coffee and cake while you work.</p>
+        <div class="meta">10:00–16:00 · [Venue address]<br>Every Saturday after launch</div>
+      </div>
+      <div class="qr" aria-label="QR code placeholder">
+        <svg viewBox="0 0 21 21" shape-rendering="crispEdges"><rect width="21" height="21" fill="#f8f7ff"/>
+          <path fill="#111126" d="M0 0h7v7H0zM14 0h7v7h-7zM0 14h7v7H0z"/><path fill="#f8f7ff" d="M1 1h5v5H1zM15 1h5v5h-5zM1 15h5v5H1z"/><path fill="#111126" d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2zM9 2h2v2H9zM8 8h3v2H8zM12 9h2v3h-2zM9 12h2v2H9zM15 10h3v2h-3zM14 14h2v2h-2zM17 15h3v2h-3zM15 18h2v3h-2zM10 16h2v4h-2z"/></svg>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

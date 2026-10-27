@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080">
+<title>Bike Repair Café launch poster: type-led chapters</title>
+<style>
+  :root {
+    --primary: #c084fc; --secondary: #00BCFF; --success: #39ff88;
+    --warning: #fff34d; --danger: #ff4d8d; --surface: #111126; --text: #f8f7ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #05050f; }
+  .poster { width: 1080px; height: 1920px; margin: 0 auto; overflow: hidden; background: var(--surface);
+    color: var(--text); font-family: Roboto, system-ui, sans-serif; display: flex; flex-direction: column; }
+
+  /* centred, type-only hero */
+  .hero { flex: 0 0 920px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 64px;
+    background: radial-gradient(800px 500px at 50% 55%, rgba(192,132,252,.22), transparent 70%); }
+  .kicker { font-family: "Source Code Pro", monospace; font-size: 24px; letter-spacing: .3em; text-transform: uppercase; color: var(--secondary);
+    text-shadow: 0 0 12px rgba(0,188,255,.7); }
+  .hero h1 { font-family: "STIX Two Text", serif; font-weight: 700; font-size: 196px; line-height: .86; letter-spacing: -.035em; margin-top: 40px; }
+  .hero h1 em { font-style: italic; font-weight: 500; color: var(--primary);
+    text-shadow: 0 0 20px rgba(192,132,252,.9), 0 0 64px rgba(192,132,252,.55); }
+  .hero .sub { font-size: 36px; line-height: 1.35; margin-top: 48px; max-width: 760px; opacity: .85; }
+  .hero .date { margin-top: 48px; font-family: "Source Code Pro", monospace; font-size: 28px; letter-spacing: .1em;
+    border-top: 2px solid rgba(248,247,255,.25); border-bottom: 2px solid rgba(248,247,255,.25); padding: 16px 32px; }
+  .hero .date b { color: var(--warning); text-shadow: 0 0 12px rgba(255,243,77,.6); }
+
+  /* alternating full-bleed chapters */
+  .chapter { flex: 1; display: grid; grid-template-columns: 200px 1fr 220px; align-items: center; gap: 32px; padding: 0 80px; }
+  .chapter .num { font-family: "STIX Two Text", serif; font-style: italic; font-size: 140px; line-height: 1; }
+  .chapter h2 { font-family: "STIX Two Text", serif; font-size: 64px; line-height: 1; }
+  .chapter p { font-size: 26px; line-height: 1.4; margin-top: 12px; max-width: 520px; }
+  .chapter .label { font-family: "Source Code Pro", monospace; font-size: 20px; letter-spacing: .24em; text-transform: uppercase; margin-bottom: 12px; display: block; }
+  .chapter svg { width: 200px; height: 200px; justify-self: end; }
+
+  .ch1 { background: var(--primary); color: var(--surface); }
+  .ch2 { background: var(--surface); }
+  .ch2 .num { color: var(--success); text-shadow: 0 0 20px rgba(57,255,136,.8); }
+  .ch2 svg { filter: drop-shadow(0 0 10px var(--success)); }
+  .ch3 { background: var(--secondary); color: var(--surface); }
+
+  .sign { flex: 0 0 180px; display: flex; justify-content: space-between; align-items: center; padding: 0 80px;
+    font-family: "Source Code Pro", monospace; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; opacity: .8; white-space: nowrap; }
+</style>
+</head>
+<body>
+<main class="poster" data-od-card>
+  <header class="hero">
+    <div class="kicker">A neighbourhood bike repair café</div>
+    <h1>Don’t bin it.<br><em>Fix it.</em></h1>
+    <p class="sub">Volunteer mechanics, borrowed tools and a pot of coffee. Bring the bike that’s been gathering dust in the shed.</p>
+    <div class="date"><b>Opens [Sat date]</b> · 10:00–16:00 · [Venue address]</div>
+  </header>
+
+  <section class="chapter ch1">
+    <div class="num">01</div>
+    <div><span class="label">Chapter one</span><h2>Wheel it in.</h2><p>Flat, squeaky, rusty, stuck in one gear. Any bike, any state.</p></div>
+    <svg viewBox="0 0 200 200" fill="none" stroke="#111126" stroke-width="8" stroke-linecap="round"><circle cx="100" cy="100" r="80"/><circle cx="100" cy="100" r="10"/><path d="M100 20v70M100 110v70M20 100h70M110 100h70M43 43l50 50M107 107l50 50M157 43l-50 50M93 107l-50 50"/></svg>
+  </section>
+
+  <section class="chapter ch2">
+    <div class="num">02</div>
+    <div><span class="label" style="color:var(--success)">Chapter two</span><h2>Fix it together.</h2><p>A volunteer works beside you, so you leave knowing how to do it next time.</p></div>
+    <svg viewBox="0 0 200 200" fill="none" stroke="#39ff88" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M40 168 L120 88 M110 40 a36 36 0 0 0 50 50 l-20 -20 -10 -20z"/></svg>
+  </section>
+
+  <section class="chapter ch3">
+    <div class="num">03</div>
+    <div><span class="label">Chapter three</span><h2>Ride it home.</h2><p>Free to use. Coffee and cake on a pay-what-you-can basis.</p></div>
+    <svg viewBox="0 0 200 200" fill="none" stroke="#111126" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M30 150 C70 150 70 60 110 60 S160 120 175 120"/><path d="M150 100 L175 120 L150 140"/></svg>
+  </section>
+
+  <footer class="sign">
+    <span>Bike Repair Café · [Neighbourhood]</span>
+    <span>Every Saturday after launch</span>
+  </footer>
+</main>
+</body>
+</html>
